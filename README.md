@@ -26,7 +26,7 @@ An open-source, production-grade knowledge base and detection pack mapping custo
 
 ---
 
-## 📊 Mapped Detection Rules (15 Active Rules)
+## 📊 Mapped Detection Rules (15 Active Detections + 2 Base Rules)
 
 This pack provides coverage across **Identify (ID)**, **Protect (PR)**, **Detect (DE)**, and **Respond (RS)** functions of the NIST CSF:
 
