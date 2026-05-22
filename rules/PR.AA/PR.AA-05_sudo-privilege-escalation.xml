@@ -28,7 +28,7 @@
 <group name="nist_csf,pr.aa-05,authorization,sudo">
 
   <rule id="100002" level="7">
-    <decoded_as>sudo</decoded_as>
+    <if_sid>5402, 5403</if_sid>
     <match>USER=root</match>
     <match>COMMAND=</match>
     <description>Privilege escalation via sudo to root</description>

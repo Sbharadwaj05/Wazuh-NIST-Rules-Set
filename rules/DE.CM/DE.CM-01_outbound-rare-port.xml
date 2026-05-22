@@ -30,7 +30,7 @@
 <group name="nist_csf,de.cm-01,network,egress">
 
   <rule id="100005" level="7">
-    <decoded_as>iptables</decoded_as>
+    <if_sid>4100</if_sid>
     <list field="dstport" lookup="match_key">etc/lists/rare-ports</list>
     <description>Outbound connection to monitored port</description>
     <mitre>

@@ -29,7 +29,7 @@
 <group name="nist_csf,de.cm-09,windows,log_integrity">
 
   <rule id="100009" level="10">
-    <decoded_as>windows_eventchannel</decoded_as>
+    <decoded_as>json</decoded_as>
     <field name="win.system.eventID">1102</field>
     <field name="win.system.channel">Security</field>
     <description>Windows Security audit log cleared</description>

@@ -28,9 +28,7 @@
 <group name="nist_csf,pr.aa-01,account_management">
 
   <rule id="100003" level="7">
-    <decoded_as>syslog</decoded_as>
-    <match>useradd</match>
-    <match>new user</match>
+    <if_sid>5902</if_sid>
     <description>New local user account created</description>
     <mitre>
       <id>T1136.001</id>

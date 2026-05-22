@@ -1,1 +1,1 @@
-Dec 10 14:27:01 webserver01 apache2[14000]: 192.168.1.105 - - [10/Dec/2026:14:27:01 +0000] "GET /index.php?cmd=whoami HTTP/1.1" 200 456
+192.168.1.105 - - [10/Dec/2026:14:27:01 +0000] "GET /index.php?cmd=whoami HTTP/1.1" 200 456

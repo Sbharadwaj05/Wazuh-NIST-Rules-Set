@@ -28,7 +28,7 @@
 <group name="nist_csf,de.cm-09,windows,service_install">
 
   <rule id="100015" level="8">
-    <decoded_as>windows_eventchannel</decoded_as>
+    <decoded_as>json</decoded_as>
     <field name="win.system.eventID">7045</field>
     <field name="win.system.providerName">Service Control Manager</field>
     <time>!08:00-18:00</time>

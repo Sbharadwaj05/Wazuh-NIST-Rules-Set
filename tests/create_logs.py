@@ -34,8 +34,8 @@ log_definitions = {
         "benign": "type=SYSCALL msg=audit(1779953200.123:457): path=/etc/services perm=r\n"
     },
     "de-ae-02/web-shell-indicators": {
-        "trigger": "Dec 10 14:27:01 webserver01 apache2[14000]: 192.168.1.105 - - [10/Dec/2026:14:27:01 +0000] \"GET /index.php?cmd=whoami HTTP/1.1\" 200 456\n",
-        "benign": "Dec 10 14:27:01 webserver01 apache2[14000]: 192.168.1.105 - - [10/Dec/2026:14:27:01 +0000] \"GET /index.php?page=home HTTP/1.1\" 200 123\n"
+        "trigger": "192.168.1.105 - - [10/Dec/2026:14:27:01 +0000] \"GET /index.php?cmd=whoami HTTP/1.1\" 200 456\n",
+        "benign": "192.168.1.105 - - [10/Dec/2026:14:27:01 +0000] \"GET /index.php?page=home HTTP/1.1\" 200 123\n"
     },
     "de-ae-03/large-file-exfiltration": {
         "trigger": "Dec 10 14:28:01 webserver01 proxy: method=POST url=https://evil-exfil.com/upload bytes=150000000\n",

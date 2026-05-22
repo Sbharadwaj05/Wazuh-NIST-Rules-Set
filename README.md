@@ -33,7 +33,7 @@ This pack provides coverage across **Identify (ID)**, **Protect (PR)**, **Detect
 | Rule ID | Name | NIST CSF v2.0 Mappings | MITRE ATT&CK | Source Data |
 | :--- | :--- | :--- | :--- | :--- |
 | **100017** | SSH Auth Failure (base) | DE.CM-01 | — | Linux `sshd` |
-| **100001** | SSH Brute Force (5+ in 60s) | DE.CM-01, RS.MA-02 | T1110.001 (Password Guessing) | Linux `sshd` |
+| **100018** | SSH Brute Force (5+ in 60s) | DE.CM-01, RS.MA-02 | T1110.001 (Password Guessing) | Linux `sshd` |
 | **100002** | Sudo Privilege Escalation | PR.AA-05, DE.CM-03 | T1548.003 (Sudo Abuse) | Linux `sudo` |
 | **100003** | New User Account Created | PR.AA-01, DE.CM-03 | T1136.001 (Local Account) | Linux `useradd` |
 | **100004** | Cron Job Modification | DE.CM-09, PR.DS-01 | T1053.003 (Cron Job) | Linux `auditd` |
@@ -43,7 +43,8 @@ This pack provides coverage across **Identify (ID)**, **Protect (PR)**, **Detect
 | **100008** | Large File Exfiltration | DE.AE-03, PR.DS-02 | T1030 (Data Transfer Limit) | Proxy/Web Logs |
 | **100009** | Windows Audit Log Cleared | DE.CM-09, RS.MA-02 | T1070.001 (Clear Event Logs) | Win Security |
 | **100010** | PSExec Lateral Movement | DE.CM-01, DE.AE-02 | T1021.002 (SMB Shares) | Win EventChannel |
-| **100016** | Windows logon failure | DE.AE-02, DE.CM-03 | T1110.003 (Password Spraying)| Win EventChannel |
+| **100016** | Windows logon failure (base) | DE.AE-02 | — | Win EventChannel |
+| **100011** | Windows Logon Spray (5+ in 300s) | DE.AE-02, DE.CM-03 | T1110.003 (Password Spraying)| Win EventChannel |
 | **100012** | Process Injection | DE.AE-02, RS.AN-08 | T1055 (Process Injection) | Win Sysmon |
 | **100013** | DNS Query to C2 Domain | ID.RA-03, DE.CM-01 | T1071.004 (DNS C2) | Win Sysmon |
 | **100014** | Sensitive Permission Change | PR.DS-01, PR.AA-05 | T1222.002 (Linux Permissions)| Linux `auditd` |

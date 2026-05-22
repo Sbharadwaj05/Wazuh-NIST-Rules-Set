@@ -28,7 +28,7 @@
 <group name="nist_csf,rs.an-08,windows,process_injection">
 
   <rule id="100012" level="10">
-    <decoded_as>windows_eventchannel</decoded_as>
+    <decoded_as>json</decoded_as>
     <field name="win.system.providerName">Microsoft-Windows-Sysmon</field>
     <field name="win.system.eventID">8</field>
     <description>Process injection indicator (Sysmon CreateRemoteThread)</description>

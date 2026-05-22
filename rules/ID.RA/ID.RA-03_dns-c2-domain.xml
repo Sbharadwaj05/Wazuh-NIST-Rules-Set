@@ -28,7 +28,7 @@
 <group name="nist_csf,id.ra-03,threat_intel,dns">
 
   <rule id="100013" level="10">
-    <decoded_as>windows_eventchannel</decoded_as>
+    <decoded_as>json</decoded_as>
     <field name="win.system.providerName">Microsoft-Windows-Sysmon</field>
     <field name="win.system.eventID">22</field>
     <list field="win.eventdata.queryName" lookup="match_key">etc/lists/c2-domains</list>

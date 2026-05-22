@@ -28,7 +28,7 @@
 <group name="nist_csf,pr.ds-01,credential_access,auditd">
 
   <rule id="100006" level="9">
-    <decoded_as>auditd</decoded_as>
+    <if_sid>80700</if_sid>
     <regex type="pcre2">path=/etc/(passwd|shadow)</regex>
     <match>perm=r</match>
     <description>Read access to /etc/passwd or /etc/shadow</description>
