@@ -5,7 +5,7 @@
   MITRE ATT&CK: T1110.003 - Brute Force: Password Spraying
   Severity: Medium
   Author: Subhash Bharadwaj
-  Last Updated: 2026-05-21
+  Last Updated: 2026-05-22
 
   Description:
     Detects repeated Windows logon failures from the same source IP.
@@ -20,6 +20,7 @@
     - Event ID 4625 is collected with source IP.
 
   Limitations:
+    - Correlation rule depends on base rule 100016 being loaded.
     - Does not enforce distinct usernames; add different_user if supported.
 
   Test: tests/sample-logs/de-ae-02/repeated-auth-failures/
@@ -27,10 +28,15 @@
 
 <group name="nist_csf,de.ae-02,authentication,windows">
 
-  <rule id="100011" level="7" frequency="5" timeframe="300">
+  <rule id="100016" level="0">
     <decoded_as>windows_eventchannel</decoded_as>
     <field name="win.system.eventID">4625</field>
     <field name="win.eventdata.logonType">3</field>
+    <description>Windows logon failure (network)</description>
+  </rule>
+
+  <rule id="100011" level="7" frequency="5" timeframe="300">
+    <if_matched_sid>100016</if_matched_sid>
     <same_srcip />
     <description>Repeated authentication failures from a single source IP</description>
     <mitre>

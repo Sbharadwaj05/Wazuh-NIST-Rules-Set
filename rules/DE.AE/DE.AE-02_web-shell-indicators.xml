@@ -5,7 +5,7 @@
   MITRE ATT&CK: T1505.003 - Server Software Component: Web Shell
   Severity: High
   Author: Subhash Bharadwaj
-  Last Updated: 2026-05-21
+  Last Updated: 2026-05-22
 
   Description:
     Detects common web shell parameters or filenames in HTTP requests.
@@ -22,6 +22,7 @@
     - Web access logs include HTTP method and URI in the raw message.
 
   Limitations:
+    - Case-sensitive matching may miss upper-case variants.
     - Obfuscated or encrypted payloads may evade simple parameter matching.
 
   Test: tests/sample-logs/de-ae-02/web-shell-indicators/
@@ -31,7 +32,7 @@
 
   <rule id="100007" level="10">
     <regex>(GET|POST|PUT)</regex>
-    <regex>(?i)((\?|&)(cmd|shell|exec|system|passthru|base64_decode|c99|r57)=|/(shell|cmd|c99|r57)\.php)</regex>
+    <regex>(cmd=|shell=|exec=|system=|passthru=|base64_decode|/(shell|cmd|c99|r57)\.php)</regex>
     <description>Possible web shell indicator in HTTP request</description>
     <mitre>
       <id>T1505.003</id>

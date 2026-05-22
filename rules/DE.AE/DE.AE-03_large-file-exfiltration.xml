@@ -5,7 +5,7 @@
   MITRE ATT&CK: T1030 - Data Transfer Size Limits
   Severity: Medium
   Author: Subhash Bharadwaj
-  Last Updated: 2026-05-21
+  Last Updated: 2026-05-22
 
   Description:
     Detects large uploads based on byte counters in web or proxy logs.
@@ -29,7 +29,7 @@
 
   <rule id="100008" level="7">
     <regex>(POST|PUT)</regex>
-    <regex>(bytes|bytes_out|sent)=([1-9][0-9]{8,})</regex>
+    <regex>(bytes|bytes_out|sent)=([1-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]*)</regex>
     <description>Possible large data upload detected (>=100MB)</description>
     <mitre>
       <id>T1030</id>
