@@ -138,7 +138,7 @@ def main():
     print("\n[*] STEP 5B: Compiling CDB Lists...")
     try:
         makelist_path = None
-        for name in ["wazuh-makelist", "ossec-makelist"]:
+        for name in ["wazuh-makelists", "ossec-makelists", "wazuh-makelist", "ossec-makelist"]:
             path = os.path.join(wazuh_root, "bin", name)
             if os.path.exists(path):
                 makelist_path = path
@@ -147,7 +147,7 @@ def main():
             subprocess.run([makelist_path], check=True)
             print(f"[+] STEP 5B complete. CDB lists compiled successfully using {os.path.basename(makelist_path)}.")
         else:
-            print("[-] Error compiling CDB lists: neither wazuh-makelist nor ossec-makelist was found in /var/ossec/bin.")
+            print("[+] STEP 5B complete. No legacy makelists binary found; CDB lists will be compiled automatically by wazuh-analysisd upon manager restart.")
     except Exception as e:
         print("[-] Error compiling CDB lists:", e)
 

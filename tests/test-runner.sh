@@ -13,7 +13,7 @@ run_test() {
   local should_trigger=$3  # "true" or "false"
   local test_name=$4
 
-  result=$(cat "$log_file" | /var/ossec/bin/wazuh-logtest 2>&1 | grep -i "rule id:" | grep -o '[0-9]*')
+  result=$(cat "$log_file" | /var/ossec/bin/wazuh-logtest 2>&1 | grep -E "^[[:space:]]*id:" | grep -o '[0-9]*')
 
   if [ "$should_trigger" = "true" ]; then
     if echo "$result" | grep -q "$rule_id"; then
