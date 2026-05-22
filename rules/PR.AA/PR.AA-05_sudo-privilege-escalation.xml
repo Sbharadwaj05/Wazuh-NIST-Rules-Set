@@ -29,8 +29,8 @@
 
   <rule id="100002" level="7">
     <if_sid>5402, 5403</if_sid>
-    <match>USER=root</match>
-    <description>Privilege escalation via sudo to root</description>
+    <regex type="pcre2">USER=root.*COMMAND=.*(/bin/bash|/bin/sh|/bin/su|\bsu\b)</regex>
+    <description>Privilege escalation via sudo to interactive root shell</description>
     <mitre>
       <id>T1548.003</id>
     </mitre>

@@ -20,10 +20,10 @@ This catalog details the behavior, required telemetry, and tuning thresholds for
 * **Required Telemetry**: Windows Security Event Log (EventChannel JSON format).
 * **Threshold Tuning**: Adjust `<frequency>5</frequency>` and `<timeframe>300</timeframe>`.
 
-### 100002: Sudo Privilege Escalation
+### 100002: Sudo Privilege Escalation (Interactive Shell)
 * **NIST Mapping**: PR.AA-05, DE.CM-03
 * **MITRE ATT&CK**: T1548.003 (Sudo Abuse)
-* **Description**: Detects when a user successfully executes a command with root privileges using `sudo`.
+* **Description**: Detects when a user successfully executes a command to spawn an interactive root shell (`/bin/bash`, `su`) using `sudo`. Avoids generic `sudo` commands to prevent alert fatigue.
 * **Required Telemetry**: Linux `sudo` logs (via `/var/log/auth.log`).
 
 ### 100003: New User Account Created
