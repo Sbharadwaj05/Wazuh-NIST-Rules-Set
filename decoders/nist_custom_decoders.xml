@@ -31,3 +31,8 @@
   <regex>PROTO=(\S+) SPT=(\d+) DPT=(\d+)</regex>
   <order>protocol,srcport,dstport</order>
 </decoder>
+
+<!-- Proxy base decoder for large file exfiltration -->
+<decoder name="proxy">
+  <program_name>^proxy</program_name>
+</decoder>
