@@ -3,11 +3,6 @@
   These supplement or replace missing/incomplete standard Wazuh decoders.
 -->
 
-<!-- Syslog base decoder (for useradd, syslog, etc.) -->
-<decoder name="syslog">
-  <prematch>^\w+\s+\d+ \d+:\d+:\d+ \S+ </prematch>
-</decoder>
-
 <!-- Sudo base decoder (so decoded_as matches 'sudo' instead of inheriting 'syslog') -->
 <decoder name="sudo">
   <prematch>^\w+\s+\d+ \d+:\d+:\d+ \S+ sudo: </prematch>

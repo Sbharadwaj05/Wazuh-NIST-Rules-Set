@@ -28,7 +28,7 @@
 <group name="nist_csf,de.ae-03,data_exfiltration,web">
 
   <rule id="100008" level="7">
-    <decoded_as>syslog</decoded_as>
+    <if_sid>1002</if_sid>
     <regex type="pcre2">\b(POST|PUT)\b.*\b(bytes|bytes_out|sent)=[0-9]{9,}</regex>
     <description>Possible large data upload detected (>=100MB)</description>
     <mitre>
