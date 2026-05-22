@@ -71,6 +71,17 @@ This repository includes a testing harness designed to run positive (trigger) an
 
 ---
 
+## 📚 Extensive Documentation
+
+To help SOC analysts, detection engineers, and IT administrators properly deploy and maintain this ruleset, we have thoroughly documented the required system configurations, rule internals, and troubleshooting lessons learned:
+
+1. **[Agent Configuration & Prerequisites](docs/prerequisites.md)**: Essential guide on how to configure Windows (Audit Policy, Sysmon, EventChannels) and Linux (`auditd`, `iptables`, `syslog`) endpoints to generate the telemetry required by these rules.
+2. **[Detection Rule Catalog](docs/rule-catalog.md)**: A detailed breakdown of all 15 rules, including the specific logs they evaluate, MITRE mappings, and threshold tuning instructions.
+3. **[Troubleshooting & Lessons Learned](docs/troubleshooting.md)**: A deep-dive masterclass into Wazuh's rules engine quirks (e.g., decoder shadowing, JSON parsing differences, level 0 invisible correlation). Read this if you plan to modify or extend the rules!
+4. **[Deployment Architecture](docs/deployment-guide.md)**: How to install the rules, lists, and custom decoders on your Wazuh manager.
+
+---
+
 ## 🤝 Contributing
 
 We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on adding new mappings, updating threat intelligence feeds, or submitting new rules.
