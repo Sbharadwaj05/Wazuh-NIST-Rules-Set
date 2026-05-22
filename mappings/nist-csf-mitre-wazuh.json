@@ -1,0 +1,262 @@
+{
+  "version": "1.0.0",
+  "framework": "NIST CSF 2.0",
+  "generated": "2026-05-22",
+  "mappings": [
+    {
+      "wazuh_rule_id": "100001",
+      "wazuh_rule_name": "SSH Brute Force Detection",
+      "nist_csf": {
+        "primary": "DE.CM-01",
+        "secondary": ["RS.MA-02"]
+      },
+      "mitre_attack": {
+        "tactic": "Credential Access",
+        "technique_id": "T1110.001",
+        "technique_name": "Brute Force: Password Guessing"
+      },
+      "log_source": "syslog",
+      "os": ["linux"],
+      "severity": "high",
+      "tags": ["authentication", "brute_force", "ssh"]
+    },
+    {
+      "wazuh_rule_id": "100002",
+      "wazuh_rule_name": "Sudo Privilege Escalation",
+      "nist_csf": {
+        "primary": "PR.AA-05",
+        "secondary": ["DE.CM-03"]
+      },
+      "mitre_attack": {
+        "tactic": "Privilege Escalation",
+        "technique_id": "T1548.003",
+        "technique_name": "Abuse Elevation Control Mechanism: Sudo and Sudo Caching"
+      },
+      "log_source": "sudo",
+      "os": ["linux"],
+      "severity": "medium",
+      "tags": ["privilege_escalation", "sudo", "authorization"]
+    },
+    {
+      "wazuh_rule_id": "100003",
+      "wazuh_rule_name": "New User Account Created",
+      "nist_csf": {
+        "primary": "PR.AA-01",
+        "secondary": ["DE.CM-03"]
+      },
+      "mitre_attack": {
+        "tactic": "Persistence",
+        "technique_id": "T1136.001",
+        "technique_name": "Create Account: Local Account"
+      },
+      "log_source": "syslog",
+      "os": ["linux"],
+      "severity": "medium",
+      "tags": ["account_management", "user_account"]
+    },
+    {
+      "wazuh_rule_id": "100004",
+      "wazuh_rule_name": "Cron Job Modification",
+      "nist_csf": {
+        "primary": "DE.CM-09",
+        "secondary": ["PR.DS-01"]
+      },
+      "mitre_attack": {
+        "tactic": "Persistence",
+        "technique_id": "T1053.003",
+        "technique_name": "Scheduled Task/Job: Cron"
+      },
+      "log_source": "auditd",
+      "os": ["linux"],
+      "severity": "medium",
+      "tags": ["persistence", "scheduled_task", "cron"]
+    },
+    {
+      "wazuh_rule_id": "100005",
+      "wazuh_rule_name": "Outbound Connection to Monitored Port",
+      "nist_csf": {
+        "primary": "DE.CM-01",
+        "secondary": ["DE.AE-03"]
+      },
+      "mitre_attack": {
+        "tactic": "Exfiltration",
+        "technique_id": "T1048",
+        "technique_name": "Exfiltration Over Alternative Protocol"
+      },
+      "log_source": "iptables",
+      "os": ["linux"],
+      "severity": "medium",
+      "tags": ["network_egress", "rare_port"]
+    },
+    {
+      "wazuh_rule_id": "100006",
+      "wazuh_rule_name": "Sensitive File Read (/etc/passwd or /etc/shadow)",
+      "nist_csf": {
+        "primary": "PR.DS-01",
+        "secondary": ["DE.CM-03"]
+      },
+      "mitre_attack": {
+        "tactic": "Credential Access",
+        "technique_id": "T1003.008",
+        "technique_name": "OS Credential Dumping: /etc/passwd and /etc/shadow"
+      },
+      "log_source": "auditd",
+      "os": ["linux"],
+      "severity": "high",
+      "tags": ["credential_access", "shadow_read"]
+    },
+    {
+      "wazuh_rule_id": "100007",
+      "wazuh_rule_name": "Web Shell Indicators in HTTP Requests",
+      "nist_csf": {
+        "primary": "DE.AE-02",
+        "secondary": ["RS.MA-02"]
+      },
+      "mitre_attack": {
+        "tactic": "Persistence",
+        "technique_id": "T1505.003",
+        "technique_name": "Server Software Component: Web Shell"
+      },
+      "log_source": "apache/nginx",
+      "os": ["linux"],
+      "severity": "high",
+      "tags": ["webshell", "web_attack"]
+    },
+    {
+      "wazuh_rule_id": "100008",
+      "wazuh_rule_name": "Large File Exfiltration (>=100MB)",
+      "nist_csf": {
+        "primary": "DE.AE-03",
+        "secondary": ["PR.DS-02"]
+      },
+      "mitre_attack": {
+        "tactic": "Exfiltration",
+        "technique_id": "T1030",
+        "technique_name": "Data Transfer Size Limits"
+      },
+      "log_source": "proxy/web",
+      "os": ["linux"],
+      "severity": "medium",
+      "tags": ["data_exfiltration", "large_upload"]
+    },
+    {
+      "wazuh_rule_id": "100009",
+      "wazuh_rule_name": "Windows Audit Log Cleared",
+      "nist_csf": {
+        "primary": "DE.CM-09",
+        "secondary": ["RS.MA-02"]
+      },
+      "mitre_attack": {
+        "tactic": "Defense Evasion",
+        "technique_id": "T1070.001",
+        "technique_name": "Indicator Removal: Clear Windows Event Logs"
+      },
+      "log_source": "windows_eventchannel",
+      "os": ["windows"],
+      "severity": "high",
+      "tags": ["log_clearing", "anti_forensics"]
+    },
+    {
+      "wazuh_rule_id": "100010",
+      "wazuh_rule_name": "PSExec Lateral Movement",
+      "nist_csf": {
+        "primary": "DE.CM-01",
+        "secondary": ["DE.AE-02"]
+      },
+      "mitre_attack": {
+        "tactic": "Lateral Movement",
+        "technique_id": "T1021.002",
+        "technique_name": "Remote Services: SMB/Windows Admin Shares"
+      },
+      "log_source": "windows_eventchannel",
+      "os": ["windows"],
+      "severity": "high",
+      "tags": ["lateral_movement", "psexec"]
+    },
+    {
+      "wazuh_rule_id": "100011",
+      "wazuh_rule_name": "Repeated Authentication Failures (Multiple Accounts)",
+      "nist_csf": {
+        "primary": "DE.AE-02",
+        "secondary": ["DE.CM-03"]
+      },
+      "mitre_attack": {
+        "tactic": "Credential Access",
+        "technique_id": "T1110.003",
+        "technique_name": "Brute Force: Password Spraying"
+      },
+      "log_source": "windows_eventchannel",
+      "os": ["windows"],
+      "severity": "medium",
+      "tags": ["authentication_failures", "brute_force"]
+    },
+    {
+      "wazuh_rule_id": "100012",
+      "wazuh_rule_name": "Process Injection Indicator (Sysmon)",
+      "nist_csf": {
+        "primary": "DE.AE-02",
+        "secondary": ["RS.AN-08"]
+      },
+      "mitre_attack": {
+        "tactic": "Defense Evasion",
+        "technique_id": "T1055",
+        "technique_name": "Process Injection"
+      },
+      "log_source": "windows_eventchannel",
+      "os": ["windows"],
+      "severity": "high",
+      "tags": ["process_injection"]
+    },
+    {
+      "wazuh_rule_id": "100013",
+      "wazuh_rule_name": "DNS Query to Known C2 Domain",
+      "nist_csf": {
+        "primary": "ID.RA-03",
+        "secondary": ["DE.CM-01"]
+      },
+      "mitre_attack": {
+        "tactic": "Command and Control",
+        "technique_id": "T1071.004",
+        "technique_name": "Application Layer Protocol: DNS"
+      },
+      "log_source": "windows_eventchannel",
+      "os": ["windows"],
+      "severity": "high",
+      "tags": ["dns", "threat_intel", "c2"]
+    },
+    {
+      "wazuh_rule_id": "100014",
+      "wazuh_rule_name": "Sensitive File Permission Change",
+      "nist_csf": {
+        "primary": "PR.DS-01",
+        "secondary": ["PR.AA-05"]
+      },
+      "mitre_attack": {
+        "tactic": "Defense Evasion",
+        "technique_id": "T1222.002",
+        "technique_name": "File and Directory Permissions Modification: Linux and Mac File and Directory Permissions Modification"
+      },
+      "log_source": "auditd",
+      "os": ["linux"],
+      "severity": "medium",
+      "tags": ["permissions_change"]
+    },
+    {
+      "wazuh_rule_id": "100015",
+      "wazuh_rule_name": "Service Installed Outside Business Hours",
+      "nist_csf": {
+        "primary": "DE.CM-09",
+        "secondary": ["DE.AE-03"]
+      },
+      "mitre_attack": {
+        "tactic": "Persistence",
+        "technique_id": "T1543.003",
+        "technique_name": "Create or Modify System Process: Windows Service"
+      },
+      "log_source": "windows_eventchannel",
+      "os": ["windows"],
+      "severity": "medium",
+      "tags": ["persistence", "service_install"]
+    }
+  ]
+}
