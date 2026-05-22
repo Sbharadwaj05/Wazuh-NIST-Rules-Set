@@ -257,6 +257,142 @@
       "os": ["windows"],
       "severity": "medium",
       "tags": ["persistence", "service_install"]
+    },
+    {
+      "wazuh_rule_id": "100019",
+      "wazuh_rule_name": "/etc/passwd Modified",
+      "nist_csf": {
+        "primary": "PR.DS-01",
+        "secondary": ["DE.CM-09"]
+      },
+      "mitre_attack": {
+        "tactic": "Credential Access",
+        "technique_id": "T1098",
+        "technique_name": "Account Manipulation"
+      },
+      "log_source": "auditd",
+      "os": ["linux"],
+      "severity": "high",
+      "tags": ["account_manipulation", "persistence"]
+    },
+    {
+      "wazuh_rule_id": "100020",
+      "wazuh_rule_name": "/etc/shadow Modified",
+      "nist_csf": {
+        "primary": "PR.DS-01",
+        "secondary": ["DE.CM-09"]
+      },
+      "mitre_attack": {
+        "tactic": "Credential Access",
+        "technique_id": "T1003.008",
+        "technique_name": "OS Credential Dumping: /etc/shadow"
+      },
+      "log_source": "auditd",
+      "os": ["linux"],
+      "severity": "critical",
+      "tags": ["credential_tampering"]
+    },
+    {
+      "wazuh_rule_id": "100021",
+      "wazuh_rule_name": "SSH authorized_keys Modified",
+      "nist_csf": {
+        "primary": "PR.AA-05",
+        "secondary": ["DE.CM-09"]
+      },
+      "mitre_attack": {
+        "tactic": "Persistence",
+        "technique_id": "T1098.004",
+        "technique_name": "Account Manipulation: SSH Authorized Keys"
+      },
+      "log_source": "auditd",
+      "os": ["linux"],
+      "severity": "high",
+      "tags": ["persistence", "ssh_keys"]
+    },
+    {
+      "wazuh_rule_id": "100022",
+      "wazuh_rule_name": "SUID/SGID Bit Set on Binary",
+      "nist_csf": {
+        "primary": "PR.AA-05",
+        "secondary": ["DE.AE-02"]
+      },
+      "mitre_attack": {
+        "tactic": "Privilege Escalation",
+        "technique_id": "T1548.001",
+        "technique_name": "Abuse Elevation Control Mechanism: Setuid and Setgid"
+      },
+      "log_source": "auditd",
+      "os": ["linux"],
+      "severity": "high",
+      "tags": ["privilege_escalation", "suid"]
+    },
+    {
+      "wazuh_rule_id": "100023",
+      "wazuh_rule_name": "Kernel Module Loaded",
+      "nist_csf": {
+        "primary": "DE.CM-09",
+        "secondary": ["DE.AE-02"]
+      },
+      "mitre_attack": {
+        "tactic": "Persistence",
+        "technique_id": "T1547.006",
+        "technique_name": "Boot or Logon Autostart Execution: Kernel Modules and Extensions"
+      },
+      "log_source": "syslog",
+      "os": ["linux"],
+      "severity": "high",
+      "tags": ["rootkit", "kernel"]
+    },
+    {
+      "wazuh_rule_id": "100024",
+      "wazuh_rule_name": "Log File Deleted or Truncated",
+      "nist_csf": {
+        "primary": "DE.CM-09",
+        "secondary": ["RS.MA-02"]
+      },
+      "mitre_attack": {
+        "tactic": "Defense Evasion",
+        "technique_id": "T1070.002",
+        "technique_name": "Indicator Removal on Host: Clear Linux or Mac System Logs"
+      },
+      "log_source": "auditd",
+      "os": ["linux"],
+      "severity": "high",
+      "tags": ["defense_evasion", "log_clearing"]
+    },
+    {
+      "wazuh_rule_id": "100025",
+      "wazuh_rule_name": "Execution from /tmp or /dev/shm",
+      "nist_csf": {
+        "primary": "DE.AE-02",
+        "secondary": ["DE.CM-03"]
+      },
+      "mitre_attack": {
+        "tactic": "Execution",
+        "technique_id": "T1059",
+        "technique_name": "Command and Scripting Interpreter"
+      },
+      "log_source": "auditd",
+      "os": ["linux"],
+      "severity": "medium",
+      "tags": ["execution", "malware_dropper"]
+    },
+    {
+      "wazuh_rule_id": "100026",
+      "wazuh_rule_name": "Root Crontab Modification",
+      "nist_csf": {
+        "primary": "DE.CM-09",
+        "secondary": ["PR.DS-01"]
+      },
+      "mitre_attack": {
+        "tactic": "Persistence",
+        "technique_id": "T1053.003",
+        "technique_name": "Scheduled Task/Job: Cron"
+      },
+      "log_source": "auditd",
+      "os": ["linux"],
+      "severity": "critical",
+      "tags": ["persistence", "cron"]
     }
   ]
 }

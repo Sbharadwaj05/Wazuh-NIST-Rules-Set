@@ -72,6 +72,38 @@ log_definitions = {
     "de-cm-09/after-hours-service-install": {
         "trigger": '{"win":{"system":{"eventID":"7045","providerName":"Service Control Manager"}}}\n',
         "benign": '{"win":{"system":{"eventID":"4624","providerName":"Service Control Manager"}}}\n'
+    },
+    "pr-ds-01/passwd-modification": {
+        "trigger": 'type=SYSCALL msg=audit(1779953400.123:459): path=/etc/passwd perm=w\n',
+        "benign": 'type=SYSCALL msg=audit(1779953400.123:459): path=/etc/passwd perm=r\n'
+    },
+    "pr-ds-01/shadow-modification": {
+        "trigger": 'type=SYSCALL msg=audit(1779953401.123:460): path=/etc/shadow perm=w\n',
+        "benign": 'type=SYSCALL msg=audit(1779953401.123:460): path=/etc/shadow perm=r\n'
+    },
+    "pr-aa-05/authorized-keys-modification": {
+        "trigger": 'type=SYSCALL msg=audit(1779953402.123:461): path=/root/.ssh/authorized_keys perm=wa\n',
+        "benign": 'type=SYSCALL msg=audit(1779953402.123:461): path=/root/.ssh/known_hosts perm=r\n'
+    },
+    "pr-aa-05/suid-sgid-set": {
+        "trigger": 'type=SYSCALL msg=audit(1779953403.123:462): key="perm_mod" mode=04755 a2=4755\n',
+        "benign": 'type=SYSCALL msg=audit(1779953403.123:462): key="perm_mod" mode=0755 a2=755\n'
+    },
+    "de-cm-09/kernel-module-loaded": {
+        "trigger": "Dec 10 14:30:00 webserver01 sudo:   subhash : TTY=pts/0 ; PWD=/home/subhash ; USER=root ; COMMAND=/sbin/modprobe evil_rootkit\n",
+        "benign": "Dec 10 14:30:00 webserver01 sudo:   subhash : TTY=pts/0 ; PWD=/home/subhash ; USER=root ; COMMAND=/bin/ls /sbin/modprobe\n"
+    },
+    "de-cm-09/log-file-deleted": {
+        "trigger": 'type=SYSCALL msg=audit(1779953404.123:463): exe="rm" name="/var/log/auth.log"\n',
+        "benign": 'type=SYSCALL msg=audit(1779953404.123:463): exe="ls" name="/var/log/auth.log"\n'
+    },
+    "de-ae-02/execution-from-tmp": {
+        "trigger": 'type=SYSCALL msg=audit(1779953405.123:464): exe="/tmp/malware.sh"\n',
+        "benign": 'type=SYSCALL msg=audit(1779953405.123:464): exe="/usr/bin/python3"\n'
+    },
+    "de-cm-09/root-crontab-modification": {
+        "trigger": 'type=SYSCALL msg=audit(1779953406.123:465): path=/etc/crontab perm=w\n',
+        "benign": 'type=SYSCALL msg=audit(1779953406.123:465): path=/var/spool/cron/crontabs/subhash perm=w\n'
     }
 }
 

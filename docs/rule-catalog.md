@@ -32,6 +32,18 @@ This catalog details the behavior, required telemetry, and tuning thresholds for
 * **Description**: Detects the execution of `useradd` or equivalent commands to provision a new local account.
 * **Required Telemetry**: Linux system logs (via `/var/log/auth.log` or `syslog`).
 
+### 100021: SSH authorized_keys Modified
+* **NIST Mapping**: PR.AA-05, DE.CM-09
+* **MITRE ATT&CK**: T1098.004 (Account Manipulation: SSH Authorized Keys)
+* **Description**: Detects write modifications to SSH `authorized_keys` files, indicating potential persistence by an attacker.
+* **Required Telemetry**: Linux `auditd` logs (`-w /root/.ssh/ -p wa`).
+
+### 100022: SUID/SGID Bit Set on Binary
+* **NIST Mapping**: PR.AA-05, DE.AE-02
+* **MITRE ATT&CK**: T1548.001 (Abuse Elevation Control Mechanism: Setuid and Setgid)
+* **Description**: Detects the SUID or SGID bit being set on a file, which allows the file to be executed with the privileges of its owner.
+* **Required Telemetry**: Linux `auditd` logs monitoring `chmod` syscalls.
+
 ---
 
 ## 📂 Data Security & Integrity (Protect & Detect)
@@ -61,6 +73,18 @@ This catalog details the behavior, required telemetry, and tuning thresholds for
 * **Description**: Detects when the Windows Security Log is explicitly cleared (Event ID 1102).
 * **Required Telemetry**: Windows Security Event Log (EventChannel JSON format).
 
+### 100019: /etc/passwd Modified
+* **NIST Mapping**: PR.DS-01, DE.CM-09
+* **MITRE ATT&CK**: T1098 (Account Manipulation)
+* **Description**: Detects write or attribute modifications to `/etc/passwd`.
+* **Required Telemetry**: Linux `auditd` logs (`-w /etc/passwd -p wa`).
+
+### 100020: /etc/shadow Modified
+* **NIST Mapping**: PR.DS-01, DE.CM-09
+* **MITRE ATT&CK**: T1003.008 (OS Credential Dumping: /etc/shadow)
+* **Description**: Critical alert detecting write modifications to `/etc/shadow`, indicating potential credential tampering.
+* **Required Telemetry**: Linux `auditd` logs (`-w /etc/shadow -p wa`).
+
 ---
 
 ## 🦠 Execution & Persistence (Detect)
@@ -89,6 +113,30 @@ This catalog details the behavior, required telemetry, and tuning thresholds for
 * **MITRE ATT&CK**: T1055 (Process Injection)
 * **Description**: Detects Cross-Process Injection techniques by looking for Sysmon Event ID 8 (`CreateRemoteThread`).
 * **Required Telemetry**: Microsoft Sysmon Operational Log.
+
+### 100023: Kernel Module Loaded
+* **NIST Mapping**: DE.CM-09, DE.AE-02
+* **MITRE ATT&CK**: T1547.006 (Kernel Modules and Extensions)
+* **Description**: Detects the loading of a kernel module via `insmod` or `modprobe`. Attackers use kernel modules (rootkits) for deep persistence.
+* **Required Telemetry**: Linux `sudo` logs via `syslog`.
+
+### 100024: Log File Deleted or Truncated
+* **NIST Mapping**: DE.CM-09, RS.MA-02
+* **MITRE ATT&CK**: T1070.002 (Clear Linux System Logs)
+* **Description**: Detects the deletion or truncation of system log files. Attackers clear logs to cover their tracks.
+* **Required Telemetry**: Linux `auditd` logs monitoring `unlink`/`truncate` syscalls or `execve` for log directories.
+
+### 100025: Execution from /tmp or /dev/shm
+* **NIST Mapping**: DE.AE-02, DE.CM-03
+* **MITRE ATT&CK**: T1059 (Command and Scripting Interpreter)
+* **Description**: Detects the execution of binaries from world-writable temporary directories (`/tmp`, `/dev/shm`, `/var/tmp`).
+* **Required Telemetry**: Linux `auditd` logs monitoring `execve` syscalls.
+
+### 100026: Root Crontab Modification
+* **NIST Mapping**: DE.CM-09, PR.DS-01
+* **MITRE ATT&CK**: T1053.003 (Scheduled Task/Job: Cron)
+* **Description**: Critical alert detecting modifications to the root user's crontab or the global `/etc/crontab` file.
+* **Required Telemetry**: Linux `auditd` logs (`-w /var/spool/cron/ -p wa`).
 
 ---
 

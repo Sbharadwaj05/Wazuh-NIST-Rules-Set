@@ -86,5 +86,29 @@ else
 fi
 run_test 100015 "tests/sample-logs/de-cm-09/after-hours-service-install/benign.log" false "After-hours service install - benign"
 
+run_test 100019 "tests/sample-logs/pr-ds-01/passwd-modification/trigger.log" true "/etc/passwd modified - trigger"
+run_test 100019 "tests/sample-logs/pr-ds-01/passwd-modification/benign.log" false "/etc/passwd modified - benign"
+
+run_test 100020 "tests/sample-logs/pr-ds-01/shadow-modification/trigger.log" true "/etc/shadow modified - trigger"
+run_test 100020 "tests/sample-logs/pr-ds-01/shadow-modification/benign.log" false "/etc/shadow modified - benign"
+
+run_test 100021 "tests/sample-logs/pr-aa-05/authorized-keys-modification/trigger.log" true "SSH authorized_keys modified - trigger"
+run_test 100021 "tests/sample-logs/pr-aa-05/authorized-keys-modification/benign.log" false "SSH authorized_keys modified - benign"
+
+run_test 100022 "tests/sample-logs/pr-aa-05/suid-sgid-set/trigger.log" true "SUID/SGID bit set - trigger"
+run_test 100022 "tests/sample-logs/pr-aa-05/suid-sgid-set/benign.log" false "SUID/SGID bit set - benign"
+
+run_test 100023 "tests/sample-logs/de-cm-09/kernel-module-loaded/trigger.log" true "Kernel module loaded - trigger"
+run_test 100023 "tests/sample-logs/de-cm-09/kernel-module-loaded/benign.log" false "Kernel module loaded - benign"
+
+run_test 100024 "tests/sample-logs/de-cm-09/log-file-deleted/trigger.log" true "Log file deleted - trigger"
+run_test 100024 "tests/sample-logs/de-cm-09/log-file-deleted/benign.log" false "Log file deleted - benign"
+
+run_test 100025 "tests/sample-logs/de-ae-02/execution-from-tmp/trigger.log" true "Execution from /tmp - trigger"
+run_test 100025 "tests/sample-logs/de-ae-02/execution-from-tmp/benign.log" false "Execution from /tmp - benign"
+
+run_test 100026 "tests/sample-logs/de-cm-09/root-crontab-modification/trigger.log" true "Root crontab modification - trigger"
+run_test 100026 "tests/sample-logs/de-cm-09/root-crontab-modification/benign.log" false "Root crontab modification - benign"
+
 echo ""
 echo "Results: $PASS passed, $FAIL failed"
