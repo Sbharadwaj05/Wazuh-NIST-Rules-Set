@@ -28,8 +28,8 @@
 <group name="nist_csf,de.ae-03,data_exfiltration,web">
 
   <rule id="100008" level="7">
-    <regex>(POST|PUT)</regex>
-    <regex>(bytes|bytes_out|sent)=([1-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]*)</regex>
+    <decoded_as>web-accesslog</decoded_as>
+    <regex type="pcre2">\b(POST|PUT)\b.*\b(bytes|bytes_out|sent)=([1-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]*)</regex>
     <description>Possible large data upload detected (>=100MB)</description>
     <mitre>
       <id>T1030</id>

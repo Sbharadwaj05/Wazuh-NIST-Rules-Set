@@ -31,8 +31,8 @@
 <group name="nist_csf,de.ae-02,web,threat">
 
   <rule id="100007" level="10">
-    <regex>(GET|POST|PUT)</regex>
-    <regex>(cmd=|shell=|exec=|system=|passthru=|base64_decode|/(shell|cmd|c99|r57)\.php)</regex>
+    <decoded_as>web-accesslog</decoded_as>
+    <regex type="pcre2">\b(GET|POST|PUT)\b.*\b(cmd=|shell=|exec=|system=|passthru=|base64_decode|/(shell|cmd|c99|r57)\.php)</regex>
     <description>Possible web shell indicator in HTTP request</description>
     <mitre>
       <id>T1505.003</id>

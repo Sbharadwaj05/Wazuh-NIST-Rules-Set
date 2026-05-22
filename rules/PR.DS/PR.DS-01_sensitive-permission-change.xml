@@ -29,8 +29,7 @@
 
   <rule id="100014" level="7">
     <decoded_as>auditd</decoded_as>
-    <regex>path=/(etc|root|var/www|opt)/</regex>
-    <regex>comm="(chmod|chown|setfacl)"</regex>
+    <regex type="pcre2">(path=/(etc|root|var/www|opt)/.*comm="(chmod|chown|setfacl)")|(comm="(chmod|chown|setfacl)".*path=/(etc|root|var/www|opt)/)</regex>
     <description>Permission change on sensitive path</description>
     <mitre>
       <id>T1222.002</id>

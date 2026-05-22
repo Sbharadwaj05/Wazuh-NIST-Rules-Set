@@ -1,3 +1,1 @@
-# Source: OpenSSH 8.x on Ubuntu 22.04
-
 Dec 10 14:23:01 webserver01 sshd[12458]: Failed password for root from 192.168.1.105 port 54821 ssh2
