@@ -37,7 +37,7 @@
 
   <rule id="100011" level="7" frequency="5" timeframe="300">
     <if_matched_sid>100016</if_matched_sid>
-    <same_srcip />
+    <same_field>win.eventdata.ipAddress</same_field>
     <description>Repeated authentication failures from a single source IP</description>
     <mitre>
       <id>T1110.003</id>

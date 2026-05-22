@@ -50,12 +50,12 @@ log_definitions = {
         "benign": '{"win":{"system":{"eventID":"7045","providerName":"Service Control Manager"},"eventdata":{"serviceName":"BenignService"}}}\n'
     },
     "de-ae-02/repeated-auth-failures": {
-        "trigger": '{"win":{"system":{"eventID":"4625"},"eventdata":{"logonType":"3"}}}\n'
-                   '{"win":{"system":{"eventID":"4625"},"eventdata":{"logonType":"3"}}}\n'
-                   '{"win":{"system":{"eventID":"4625"},"eventdata":{"logonType":"3"}}}\n'
-                   '{"win":{"system":{"eventID":"4625"},"eventdata":{"logonType":"3"}}}\n'
-                   '{"win":{"system":{"eventID":"4625"},"eventdata":{"logonType":"3"}}}\n',
-        "benign": '{"win":{"system":{"eventID":"4624"},"eventdata":{"logonType":"3"}}}\n'
+        "trigger": '{"win":{"system":{"eventID":"4625"},"eventdata":{"logonType":"3","ipAddress":"192.168.1.105"}}}\n'
+                   '{"win":{"system":{"eventID":"4625"},"eventdata":{"logonType":"3","ipAddress":"192.168.1.105"}}}\n'
+                   '{"win":{"system":{"eventID":"4625"},"eventdata":{"logonType":"3","ipAddress":"192.168.1.105"}}}\n'
+                   '{"win":{"system":{"eventID":"4625"},"eventdata":{"logonType":"3","ipAddress":"192.168.1.105"}}}\n'
+                   '{"win":{"system":{"eventID":"4625"},"eventdata":{"logonType":"3","ipAddress":"192.168.1.105"}}}\n',
+        "benign": '{"win":{"system":{"eventID":"4624"},"eventdata":{"logonType":"3","ipAddress":"192.168.1.105"}}}\n'
     },
     "rs-an-08/process-injection": {
         "trigger": '{"win":{"system":{"providerName":"Microsoft-Windows-Sysmon","eventID":"8"}}}\n',

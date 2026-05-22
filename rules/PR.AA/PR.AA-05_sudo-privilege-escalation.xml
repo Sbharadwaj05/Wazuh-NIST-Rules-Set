@@ -30,7 +30,6 @@
   <rule id="100002" level="7">
     <if_sid>5402, 5403</if_sid>
     <match>USER=root</match>
-    <match>COMMAND=</match>
     <description>Privilege escalation via sudo to root</description>
     <mitre>
       <id>T1548.003</id>

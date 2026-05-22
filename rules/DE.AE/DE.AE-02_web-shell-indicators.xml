@@ -31,7 +31,7 @@
 <group name="nist_csf,de.ae-02,web,threat">
 
   <rule id="100007" level="10">
-    <decoded_as>web-accesslog</decoded_as>
+    <if_sid>31100</if_sid>
     <regex type="pcre2">\b(GET|POST|PUT)\b.*\b(cmd=|shell=|exec=|system=|passthru=|base64_decode|/(shell|cmd|c99|r57)\.php)</regex>
     <description>Possible web shell indicator in HTTP request</description>
     <mitre>
