@@ -19,7 +19,9 @@
 
   <!-- Rule 100052: Windows Defender Tampering via PowerShell -->
   <rule id="100052" level="12">
-    <if_sid>61603</if_sid>
+    <decoded_as>json</decoded_as>
+    <field name="win.system.providerName">Microsoft-Windows-Sysmon</field>
+    <field name="win.system.eventID">^1$</field>
     <regex type="pcre2" match="all">(?i)(Set-MpPreference|Add-MpPreference)</regex>
     <regex type="pcre2" match="all">(?i)(-DisableRealtimeMonitoring\s*(\$true|1)|-ExclusionPath|-ExclusionProcess|-ExclusionExtension)</regex>
     <description>CRITICAL: Windows Defender tampering detected (Defense Evasion)</description>
@@ -31,7 +33,9 @@
 
   <!-- Rule 100053: Execution from Recycle Bin -->
   <rule id="100053" level="9">
-    <if_sid>61603, 60103</if_sid>
+    <decoded_as>json</decoded_as>
+    <field name="win.system.providerName">Microsoft-Windows-Sysmon</field>
+    <field name="win.system.eventID">^1$</field>
     <regex type="pcre2" match="all">(?i)\\(\$Recycle\.bin|RECYCLER)\\</regex>
     <description>Execution from the Recycle Bin detected (Defense Evasion/Persistence)</description>
     <mitre>

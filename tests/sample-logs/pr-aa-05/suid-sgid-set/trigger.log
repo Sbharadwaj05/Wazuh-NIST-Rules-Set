@@ -1,2 +1,1 @@
-type=SYSCALL msg=audit(1779953403.123:462): arch=c000003e syscall=268 success=yes exit=0 a0=ffffff9c a1=55a3b2c a2=800 a3=0 items=1 ppid=2345 pid=3456 auid=1000 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=pts0 ses=1 comm="chmod" exe="/bin/chmod" key="perm_mod"
-type=PATH msg=audit(1779953403.123:462): item=0 name="/usr/local/bin/evil" inode=1238 dev=08:01 mode=0104755 ouid=0 ogid=0 rdev=00:00 nametype=NORMAL a2=4755
+type=SYSCALL msg=audit(1779953403.123:462): arch=c000003e syscall=268 key="perm_mod" a2=4755

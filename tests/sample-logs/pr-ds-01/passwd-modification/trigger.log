@@ -1,1 +1,1 @@
-type=PATH msg=audit(1779953400.123:459): item=0 name="/etc/passwd" inode=1234 dev=08:01 mode=0100644 ouid=0 ogid=0 rdev=00:00 nametype=NORMAL perm=w
+type=SYSCALL msg=audit(1779953400.123:459): arch=c000003e syscall=2 path=/etc/passwd perm=w
