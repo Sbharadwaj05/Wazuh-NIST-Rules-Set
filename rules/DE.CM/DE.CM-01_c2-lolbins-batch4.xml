@@ -44,9 +44,9 @@
   <!-- Rule 100045: TOR Exit Node Connection -->
   <rule id="100045" level="12">
     <!-- Relies on custom iptables or proxy decoders matching dest IP against a CDB list -->
-    <if_sid>80700</if_sid> <!-- Placeholder parent rule, normally tied to generic firewall rule -->
-    <!-- Requires a CDB list in practice. Simulating with regex for proxy logic -->
-    <regex type="pcre2">(?i)(tor_exit_node_detected|dstip="known_tor_node")</regex>
+    <if_sid>4100</if_sid> <!-- Standard Wazuh firewall parent rule -->
+    <!-- Requires a CDB list in practice. Simulating with regex for testing -->
+    <regex type="pcre2">(?i)(tor_exit_node_detected|DST=known_tor_node)</regex>
     <description>Connection to known TOR exit node (Command and Control)</description>
     <mitre>
       <id>T1090.003</id>
@@ -55,11 +55,12 @@
   </rule>
 
   <!-- Helper Rule 100054: IPv4 network connection helper -->
-  <rule id="100054" level="0">
+  <rule id="100054" level="1">
     <decoded_as>json</decoded_as>
     <field name="win.system.providerName">Microsoft-Windows-Sysmon</field>
     <field name="win.system.eventID">^3$</field>
     <field name="win.eventdata.destinationIsIpv6">false</field>
+    <options>no_log</options>
     <description>Helper: Sysmon Network Connection IPv4</description>
   </rule>
 

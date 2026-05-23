@@ -30,16 +30,17 @@
 
 <group name="nist_csf,de.cm-01,authentication,ssh">
 
-  <!-- Base rule: individual SSH login failure (silent, level 0) -->
-  <rule id="100017" level="0">
+  <!-- Base rule: individual SSH login failure (helper rule for correlation) -->
+  <rule id="100017" level="1">
     <decoded_as>sshd</decoded_as>
     <match>Failed password</match>
+    <options>no_log</options>
     <description>SSH authentication failure (base rule for correlation)</description>
   </rule>
 
   <!-- Correlation rule: brute force (5+ failures from same IP in 60s) -->
   <rule id="100018" level="10" frequency="5" timeframe="60">
-    <if_matched_sid>5760</if_matched_sid>
+    <if_matched_sid>100017</if_matched_sid>
     <same_srcip />
     <description>SSH brute force attack detected from a single source IP</description>
     <mitre>

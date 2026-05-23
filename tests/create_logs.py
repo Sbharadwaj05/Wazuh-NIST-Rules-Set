@@ -190,8 +190,8 @@ log_definitions = {
         "benign": '{"win":{"system":{"eventID":"22","providerName":"Microsoft-Windows-Sysmon"},"eventdata":{"queryName":"google.com"}}}\n'
     },
     "de-ae-03/tor-exit": {
-        "trigger": 'type=SYSCALL msg=audit(1779953409.123:469): dstip="known_tor_node"\n',
-        "benign": 'type=SYSCALL msg=audit(1779953409.123:469): dstip="8.8.8.8"\n'
+        "trigger": 'Dec 10 14:26:01 firewall kernel: [12345.678] OUTBOUND-BLOCK: IN= OUT=eth0 SRC=192.168.1.100 DST=known_tor_node LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=12345 DF PROTO=TCP SPT=54321 DPT=443 WINDOW=65535 RES=0x00 SYN URGP=0\n',
+        "benign": 'Dec 10 14:26:01 firewall kernel: [12345.678] OUTBOUND-BLOCK: IN= OUT=eth0 SRC=192.168.1.100 DST=8.8.8.8 LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=12345 DF PROTO=TCP SPT=54321 DPT=443 WINDOW=65535 RES=0x00 SYN URGP=0\n'
     },
     "de-ae-02/beaconing": {
         "trigger": '{"win":{"system":{"eventID":"3","providerName":"Microsoft-Windows-Sysmon"},"eventdata":{"destinationIsIpv6":"false","destinationIp":"1.2.3.4"}}}\n'*20,

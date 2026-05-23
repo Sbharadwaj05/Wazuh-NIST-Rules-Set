@@ -66,9 +66,8 @@ run_test 100010 "tests/sample-logs/de-cm-01/psexec-lateral-movement/trigger.log"
 run_test 100010 "tests/sample-logs/de-cm-01/psexec-lateral-movement/benign.log" false "PSExec lateral movement - benign"
 
 # Rule 100011 is frequency-based (needs 5+ events in 300s).
-# wazuh-logtest processes logs line-by-line and cannot simulate time-based correlation.
-# We verify rule 100016 (the helper) fires correctly instead.
-run_test 100016 "tests/sample-logs/de-ae-02/repeated-auth-failures/trigger.log" true "Windows logon failure helper (100016) - trigger"
+# By feeding all logs at once to wazuh-logtest, state is preserved!
+run_test 100011 "tests/sample-logs/de-ae-02/repeated-auth-failures/trigger.log" true "Windows logon failure frequency (100011) - trigger"
 run_test 100011 "tests/sample-logs/de-ae-02/repeated-auth-failures/benign.log" false "Windows logon failure - benign"
 
 run_test 100012 "tests/sample-logs/rs-an-08/process-injection/trigger.log" true "Process injection - trigger"
@@ -153,8 +152,8 @@ run_test 100038 "tests/sample-logs/id-ra-03/dcsync/benign.log" false "DCSync - b
 run_test 100039 "tests/sample-logs/id-ra-03/kerberoasting/trigger.log" true "Kerberoasting - trigger"
 run_test 100039 "tests/sample-logs/id-ra-03/kerberoasting/benign.log" false "Kerberoasting - benign"
 
-run_test 100055 "tests/sample-logs/de-ae-02/lockouts/trigger.log" true "Multiple Lockouts (100055 helper) - trigger"
-run_test 100055 "tests/sample-logs/de-ae-02/lockouts/benign.log" false "Multiple Lockouts - benign"
+run_test 100040 "tests/sample-logs/de-ae-02/lockouts/trigger.log" true "Multiple Lockouts frequency (100040) - trigger"
+run_test 100040 "tests/sample-logs/de-ae-02/lockouts/benign.log" false "Multiple Lockouts - benign"
 
 run_test 100041 "tests/sample-logs/pr-aa-05/linux-shadow/trigger.log" true "Linux Shadow Read - trigger"
 run_test 100041 "tests/sample-logs/pr-aa-05/linux-shadow/benign.log" false "Linux Shadow Read - benign"
@@ -171,7 +170,7 @@ run_test 100044 "tests/sample-logs/de-ae-03/dns-tunnel/benign.log" false "DNS Tu
 run_test 100045 "tests/sample-logs/de-ae-03/tor-exit/trigger.log" true "TOR Exit Node - trigger"
 run_test 100045 "tests/sample-logs/de-ae-03/tor-exit/benign.log" false "TOR Exit Node - benign"
 
-run_test 100054 "tests/sample-logs/de-ae-02/beaconing/trigger.log" true "Beaconing (100054 helper) - trigger"
+run_test 100046 "tests/sample-logs/de-ae-02/beaconing/trigger.log" true "Beaconing frequency (100046) - trigger"
 run_test 100046 "tests/sample-logs/de-ae-02/beaconing/benign.log" false "Beaconing - benign"
 
 run_test 100047 "tests/sample-logs/de-ae-02/certutil/trigger.log" true "Certutil - trigger"

@@ -28,10 +28,11 @@
 
 <group name="nist_csf,de.ae-02,authentication,windows">
 
-  <rule id="100016" level="0">
+  <rule id="100016" level="1">
     <decoded_as>json</decoded_as>
     <field name="win.system.eventID">4625</field>
     <field name="win.eventdata.logonType">3</field>
+    <options>no_log</options>
     <description>Windows logon failure (network)</description>
   </rule>
 
