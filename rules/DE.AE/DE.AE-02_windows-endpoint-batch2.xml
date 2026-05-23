@@ -8,7 +8,7 @@
   <!-- Rule 100027: PowerShell Encoded Command Execution -->
   <rule id="100027" level="10">
     <if_sid>61603</if_sid> <!-- Base Sysmon Event 1 or Script Block 4104 -->
-    <regex type="pcre2" match="all">(?i)(powershell|pwsh)\.exe.*(\-e(nc(oded(Command)?)?)?|\-e\s)</regex>
+    <regex type="pcre2">(?i)(powershell|pwsh)\.exe.*(\-e(nc(oded(Command)?)?)?|\-e\s)</regex>
     <description>PowerShell encoded command execution (Defense Evasion)</description>
     <mitre>
       <id>T1059.001</id>
@@ -19,7 +19,7 @@
   <!-- Rule 100028: PowerShell Download Cradle -->
   <rule id="100028" level="10">
     <if_sid>61603</if_sid>
-    <regex type="pcre2" match="all">(?i)(Net\.WebClient|Invoke-WebRequest|DownloadString|DownloadFile|IEX|Invoke-Expression)</regex>
+    <regex type="pcre2">(?i)(Net\.WebClient|Invoke-WebRequest|DownloadString|DownloadFile|IEX|Invoke-Expression)</regex>
     <description>PowerShell download cradle detected (Execution/Command and Control)</description>
     <mitre>
       <id>T1059.001</id>
@@ -30,7 +30,7 @@
   <!-- Rule 100029: Scheduled Task Created via Schtasks.exe -->
   <rule id="100029" level="8">
     <if_sid>61603, 60103</if_sid> <!-- Sysmon process create or Windows Security 4688 -->
-    <regex type="pcre2" match="all">(?i)schtasks\.exe.*\/create</regex>
+    <regex type="pcre2">(?i)schtasks\.exe.*\/create</regex>
     <description>Scheduled task created via schtasks.exe (Persistence)</description>
     <mitre>
       <id>T1053.005</id>
@@ -41,7 +41,7 @@
   <!-- Rule 100030: Registry Run/RunOnce Key Modification -->
   <rule id="100030" level="10">
     <if_sid>61614, 61615</if_sid> <!-- Sysmon Event ID 12/13/14 for Registry -->
-    <regex type="pcre2" match="all">(?i)(Software\\Microsoft\\Windows\\CurrentVersion\\Run|Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce)</regex>
+    <regex type="pcre2">(?i)(Software\\Microsoft\\Windows\\CurrentVersion\\Run|Software\\Microsoft\\Windows\\CurrentVersion\\RunOnce)</regex>
     <description>Registry Run/RunOnce key modification (Persistence)</description>
     <mitre>
       <id>T1547.001</id>
@@ -52,7 +52,7 @@
   <!-- Rule 100031: Volume Shadow Copy Deleted -->
   <rule id="100031" level="14">
     <if_sid>61603, 60103</if_sid>
-    <regex type="pcre2" match="all">(?i)(vssadmin|wmic).*(delete\sshadows|shadowcopy\sdelete)</regex>
+    <regex type="pcre2">(?i)(vssadmin|wmic).*(delete\sshadows|shadowcopy\sdelete)</regex>
     <description>CRITICAL: Volume shadow copy deleted, possible Ransomware activity (Inhibit System Recovery)</description>
     <mitre>
       <id>T1490</id>
@@ -63,7 +63,7 @@
   <!-- Rule 100032: New Local Administrator Account Created -->
   <rule id="100032" level="10">
     <if_sid>60106, 60108</if_sid> <!-- Windows Security 4720 (User Create) or 4732 (Group Add) -->
-    <regex type="pcre2" match="all">(?i)(Administrators|Domain\sAdmins|Enterprise\sAdmins)</regex>
+    <regex type="pcre2">(?i)(Administrators|Domain\sAdmins|Enterprise\sAdmins)</regex>
     <description>New local or domain administrator account created/added (Persistence/Privilege Escalation)</description>
     <mitre>
       <id>T1136.001</id>
@@ -74,7 +74,7 @@
   <!-- Rule 100033: RDP Enabled or Port Changed -->
   <rule id="100033" level="9">
     <if_sid>61614, 61615</if_sid> <!-- Registry Modification -->
-    <regex type="pcre2" match="all">(?i)(System\\CurrentControlSet\\Control\\Terminal Server\\fDenyTSConnections|System\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp\\PortNumber)</regex>
+    <regex type="pcre2">(?i)(System\\CurrentControlSet\\Control\\Terminal Server\\fDenyTSConnections|System\\CurrentControlSet\\Control\\Terminal Server\\WinStations\\RDP-Tcp\\PortNumber)</regex>
     <description>RDP enabled or default port changed via Registry (Lateral Movement/Defense Evasion)</description>
     <mitre>
       <id>T1021.001</id>
@@ -85,7 +85,7 @@
   <!-- Rule 100034: WMI Event Subscription Created -->
   <rule id="100034" level="12">
     <if_sid>61621, 61622, 61623</if_sid> <!-- Sysmon Event ID 19, 20, 21 for WMI -->
-    <regex type="pcre2" match="all">(?i)(__EventFilter|__EventConsumer|__FilterToConsumerBinding)</regex>
+    <regex type="pcre2">(?i)(__EventFilter|__EventConsumer|__FilterToConsumerBinding)</regex>
     <description>WMI event subscription created (Persistence/Defense Evasion)</description>
     <mitre>
       <id>T1546.003</id>

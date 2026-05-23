@@ -116,8 +116,8 @@ log_definitions = {
     "de-ae-04/execution-from-recycle-bin": {
         "trigger": '{"win":{"system":{"eventID":"1"}, "eventdata":{"commandLine":"C:\\\\$Recycle.bin\\\\malware.exe"}}}',
         "benign": '{"win":{"system":{"eventID":"1"}, "eventdata":{"commandLine":"C:\\\\Windows\\\\System32\\\\cmd.exe"}}}'
-    },
-    "de-ae-02/powershell-encoded": {
+    }
+    ,"de-ae-02/powershell-encoded": {
         "trigger": '{"win":{"system":{"eventID":"1","providerName":"Microsoft-Windows-Sysmon"},"eventdata":{"commandLine":"powershell.exe -enc JABzAD0ATgBlAHcALQBPAGIAagBlAGMAdAAgAEkATwAuAE0AZQBtAG8AcgB5AFMAdAByAGUAYQBtACgAWwBDAG8AbgB2AGUAcgB0AF0AOgA6AEYAcgBvAG0AQgBhAHMAZQA2ADQAUwB0AHIAaQBuAGcAKAAiAEgA"}}}\n',
         "benign": '{"win":{"system":{"eventID":"1","providerName":"Microsoft-Windows-Sysmon"},"eventdata":{"commandLine":"powershell.exe Get-Process"}}}\n'
     },

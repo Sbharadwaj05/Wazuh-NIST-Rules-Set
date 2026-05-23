@@ -29,7 +29,7 @@
 
   <rule id="100023" level="8">
     <if_sid>5402, 5403</if_sid>
-    <regex type="pcre2">COMMAND=.*(/sbin/modprobe|/sbin/insmod|/usr/sbin/modprobe|/usr/sbin/insmod|/bin/kmod\s)</regex>
+    <regex type="pcre2">COMMAND=(/sbin/modprobe|/sbin/insmod|/usr/sbin/modprobe|/usr/sbin/insmod|/bin/kmod\s)</regex>
     <description>Kernel module loaded (Potential Rootkit Persistence)</description>
     <mitre>
       <id>T1547.006</id>

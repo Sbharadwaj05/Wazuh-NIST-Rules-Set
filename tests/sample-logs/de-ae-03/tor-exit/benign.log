@@ -1,0 +1,1 @@
+type=SYSCALL msg=audit(1779953409.123:469): dstip="8.8.8.8"

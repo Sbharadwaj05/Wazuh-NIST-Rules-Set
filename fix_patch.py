@@ -1,0 +1,21 @@
+with open('patch_tests.py', 'r') as f:
+    c = f.read()
+c = c.replace("}\\n',\n", "}\\\\n',\n")
+c = c.replace('}\\n\'\n', '}\\\\n\'\n')
+c = c.replace('"\\n\',\n', '"\\\\n\',\n')
+c = c.replace('"\\n\'\n', '"\\\\n\'\n')
+c = c.replace("}\\n'*5,\n", "}\\\\n'*5,\n")
+c = c.replace("}\\n'*20,\n", "}\\\\n'*20,\n")
+c = c.replace("t\\n',\n", "t\\\\n',\n")
+c = c.replace("y\\n',\n", "y\\\\n',\n")
+c = c.replace("\"\n',", "\"\\n',")
+c = c.replace("}\n',", "}\\n',")
+c = c.replace("\"\n'\n", "\"\\n'\n")
+c = c.replace("}\n'\n", "}\\n'\n")
+c = c.replace("\"\n'*20,\n", "\"\\n'*20,\n")
+c = c.replace("\"\n'*5,\n", "\"\\n'*5,\n")
+c = c.replace("}\n'*20,\n", "}\\n'*20,\n")
+c = c.replace("}\n'*5,\n", "}\\n'*5,\n")
+
+with open('patch_tests.py', 'w') as f:
+    f.write(c)

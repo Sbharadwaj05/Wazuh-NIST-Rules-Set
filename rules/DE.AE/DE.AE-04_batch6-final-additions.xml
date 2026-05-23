@@ -19,7 +19,7 @@
 
   <!-- Rule 100052: Windows Defender Tampering via PowerShell -->
   <!-- Uses <field> against the decoded commandLine value (not raw JSON regex) -->
-  <!-- Root cause of prior failure: multiple <regex match="all"> against raw JSON -->
+  <!-- Root cause of prior failure: multiple <regex> against raw JSON -->
   <!-- fails silently in Wazuh 4.8.2 when \$ escaping is involved.            -->
   <rule id="100052" level="12">
     <decoded_as>json</decoded_as>
@@ -38,7 +38,7 @@
     <decoded_as>json</decoded_as>
     <field name="win.system.providerName">Microsoft-Windows-Sysmon</field>
     <field name="win.system.eventID">^1$</field>
-    <regex type="pcre2" match="all">(?i)\\(\$Recycle\.bin|RECYCLER)\\</regex>
+    <regex type="pcre2">(?i)\\(\$Recycle\.bin|RECYCLER)\\</regex>
     <description>Execution from the Recycle Bin detected (Defense Evasion/Persistence)</description>
     <mitre>
       <id>T1036</id>
