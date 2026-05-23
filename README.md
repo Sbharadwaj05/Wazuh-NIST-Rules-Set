@@ -4,11 +4,53 @@
 [![NIST CSF Mapping](https://img.shields.io/badge/NIST%20CSF-v2.0-orange.svg)](https://www.nist.gov/cyberframework)
 [![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](LICENSE)
 
-An open-source, production-grade knowledge base and detection pack mapping custom Wazuh rules to **NIST Cybersecurity Framework (CSF) v2.0** outcomes. Designed for detection engineers, SOC analysts, and security auditors who need rigorous, evidence-driven, and test-backed mappings.
+An open-source, production-grade knowledge base and detection pack mapping custom Wazuh rules to **NIST Cybersecurity Framework (CSF) v2.0** outcomes.
+
+### 💡 Why this exists
+Wazuh includes compliance mappings internally, but operationalizing NIST-aligned detections across custom environments can often feel fragmented. This project provides structured, modular Wazuh detection rules for easier **compliance visibility**, **monitoring support**, and **detection engineering experimentation**. We do not claim to provide "complete NIST implementation," but rather a rigorously tested foundation for detection-alignment.
 
 ---
 
-## 🎯 Project Mission & Core Principles
+## 🏗️ Architecture & Workflow
+
+``mermaid
+graph LR
+    A[Endpoint Telemetry] -->|Sysmon / Auditd| B[Wazuh Agent]
+    B -->|Log Stream| C[Wazuh Manager]
+    C -->|Custom Decoders| D[Rules Engine]
+    D -->|NIST/MITRE Mapping| E[Security Alert]
+    E --> F[Dashboard / SIEM]
+`
+
+## 🧪 Lab Tested Environment
+To ensure production readiness and high-fidelity alerts, all rules have been actively tested against:
+* **OS**: Ubuntu 22.04 LTS & Windows Server 2022
+* **Wazuh**: Manager & Agent v4.8.0
+* **Telemetry**: Sysmon (Windows), Auditd & Syslog (Linux)
+* **Simulation**: Custom synthetic log injection and wazuh-logtest harness
+
+## 🔥 Example Alert Output
+Every alert triggered by this pack is natively enriched with MITRE ATT&CK context and NIST CSF tags directly in the Wazuh JSON event:
+``json
+{
+  "rule": {
+    "level": 10,
+    "description": "SSH brute force attack detected from a single source IP",
+    "id": "100018",
+    "mitre": {
+      "id": [ "T1110.001" ],
+      "tactic": [ "Credential Access" ],
+      "technique": [ "Brute Force: Password Guessing" ]
+    },
+    "groups": [ "authentication_failures", "brute_force", "nist_de.cm-01", "nist_rs.ma-02" ]
+  },
+  "decoder": { "name": "sshd" }
+}
+`
+
+---
+
+## ?? Project Mission & Core Principles
 
 1. **Rigorous Evidence-Driven Mapping:** We map rules only where there is explicit, telemetry-supported alignment to a NIST CSF v2.0 subcategory. We never overclaim compliance.
 2. **Traceability & Auditing:** Every mapping is fully documented inside the rule XML files and verified using repeatable synthetic log tests.
