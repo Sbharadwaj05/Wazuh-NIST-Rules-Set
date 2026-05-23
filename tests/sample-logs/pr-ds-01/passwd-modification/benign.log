@@ -1,1 +1,1 @@
-type=SYSCALL msg=audit(1779953400.123:459): arch=c000003e syscall=2 path=/var/log/syslog perm=r
+type=SYSCALL msg=audit(1779953400.123:459): path=/var/log/syslog perm=r

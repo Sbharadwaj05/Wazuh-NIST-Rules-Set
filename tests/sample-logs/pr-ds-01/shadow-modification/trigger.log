@@ -1,1 +1,1 @@
-type=SYSCALL msg=audit(1779953401.123:460): arch=c000003e syscall=2 path=/etc/shadow perm=w
+type=SYSCALL msg=audit(1779953401.123:460): path=/etc/shadow perm=w

@@ -1,1 +1,1 @@
-type=SYSCALL msg=audit(1779953403.123:462): arch=c000003e syscall=268 key="perm_mod" a2=755
+type=SYSCALL msg=audit(1779953403.123:462): key="perm_mod" a2=755

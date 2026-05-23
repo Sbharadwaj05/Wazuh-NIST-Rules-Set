@@ -18,12 +18,14 @@
   </rule>
 
   <!-- Rule 100052: Windows Defender Tampering via PowerShell -->
+  <!-- Uses <field> against the decoded commandLine value (not raw JSON regex) -->
+  <!-- Root cause of prior failure: multiple <regex match="all"> against raw JSON -->
+  <!-- fails silently in Wazuh 4.8.2 when \$ escaping is involved.            -->
   <rule id="100052" level="12">
     <decoded_as>json</decoded_as>
     <field name="win.system.providerName">Microsoft-Windows-Sysmon</field>
     <field name="win.system.eventID">^1$</field>
-    <regex type="pcre2" match="all">(?i)(Set-MpPreference|Add-MpPreference)</regex>
-    <regex type="pcre2" match="all">(?i)(-DisableRealtimeMonitoring\s*(\$true|1)|-ExclusionPath|-ExclusionProcess|-ExclusionExtension)</regex>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)(Set-MpPreference|Add-MpPreference).*(-DisableRealtimeMonitoring|-ExclusionPath|-ExclusionProcess|-ExclusionExtension)</field>
     <description>CRITICAL: Windows Defender tampering detected (Defense Evasion)</description>
     <mitre>
       <id>T1562.001</id>
