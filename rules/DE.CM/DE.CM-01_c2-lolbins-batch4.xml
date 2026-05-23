@@ -1,0 +1,93 @@
+<!-- 
+  Batch 4: C2, Exfiltration & Living-off-the-Land (Rules 100042 - 100048)
+  NIST Focus: DE.CM-01, DE.AE-03, DE.AE-02, PR.DS-02
+-->
+
+<group name="linux, auditd, windows, sysmon, iptables, proxy, nist_csf, mitre_attack,">
+
+  <!-- Rule 100042: Reverse Shell Spawned -->
+  <rule id="100042" level="12">
+    <if_sid>80700, 61603</if_sid> <!-- Auditd syscall or Sysmon process creation -->
+    <regex type="pcre2" match="all">(?i)(bash\s-i|sh\s-i|nc\s-e|\/dev\/tcp\/|mkfifo\s.*?nc)</regex>
+    <description>Reverse shell execution detected (Command and Control)</description>
+    <mitre>
+      <id>T1059.004</id>
+    </mitre>
+    <group>DE.AE-02, RS.MA-02</group>
+  </rule>
+
+  <!-- Rule 100043: Base64 Encoded Command Execution -->
+  <rule id="100043" level="9">
+    <if_sid>80700, 61603</if_sid>
+    <!-- Simple heuristic for common base64 CLI flags + long base64 strings -->
+    <regex type="pcre2" match="all">(?i)(\-e\s|\-enc\s|base64\s-d).*?[A-Za-z0-9+/]{30,}={0,2}</regex>
+    <description>Suspicious Base64 encoded command execution (Obfuscation)</description>
+    <mitre>
+      <id>T1027</id>
+    </mitre>
+    <group>DE.AE-02, DE.CM-03</group>
+  </rule>
+
+  <!-- Rule 100044: DNS Tunneling Indicators -->
+  <rule id="100044" level="10">
+    <if_sid>61625, 80700</if_sid> <!-- Sysmon DNS (Event 22) or equivalent syslog DNS logic -->
+    <!-- Look for DNS queries exceeding 40 characters in subdomains -->
+    <regex type="pcre2" match="all">(?i)QueryName.*[A-Za-z0-9\-\.]{40,}\.(com|net|org|io|xyz)</regex>
+    <description>DNS tunneling indicators: Anomalously long subdomain query (Command and Control)</description>
+    <mitre>
+      <id>T1071.004</id>
+    </mitre>
+    <group>DE.CM-01, DE.AE-03</group>
+  </rule>
+
+  <!-- Rule 100045: TOR Exit Node Connection -->
+  <rule id="100045" level="12">
+    <!-- Relies on custom iptables or proxy decoders matching dest IP against a CDB list -->
+    <if_sid>80700</if_sid> <!-- Placeholder parent rule, normally tied to generic firewall rule -->
+    <!-- Requires a CDB list in practice. Simulating with regex for proxy logic -->
+    <regex type="pcre2" match="all">(?i)(tor_exit_node_detected|dstip="known_tor_node")</regex>
+    <description>Connection to known TOR exit node (Command and Control)</description>
+    <mitre>
+      <id>T1090.003</id>
+    </mitre>
+    <group>DE.CM-01, DE.AE-03</group>
+  </rule>
+
+  <!-- Rule 100046: Beaconing Behaviour -->
+  <rule id="100046" level="9" frequency="20" timeframe="600">
+    <!-- Detects frequent connections to the same external IP within a 10m window -->
+    <if_sid>61605</if_sid> <!-- Sysmon Network Connect (Event 3) -->
+    <regex type="pcre2" match="all">(?i)DestinationIsIpv6.*false</regex> <!-- Ignore local/IPv6 noise -->
+    <same_source_ip />
+    <description>Potential beaconing behaviour: high frequency connections to same host (Command and Control)</description>
+    <mitre>
+      <id>T1071.001</id>
+    </mitre>
+    <group>DE.AE-02, DE.CM-01</group>
+  </rule>
+
+  <!-- Rule 100047: Certutil Used to Download File -->
+  <rule id="100047" level="10">
+    <if_sid>61603</if_sid>
+    <regex type="pcre2" match="all">(?i)certutil\.exe</regex>
+    <regex type="pcre2" match="all">(?i)(\-urlcache|\-split|\-f|http(s)?:\/\/)</regex>
+    <description>Certutil LOLBin used to download remote file (Ingress Tool Transfer)</description>
+    <mitre>
+      <id>T1105</id>
+    </mitre>
+    <group>DE.AE-02, DE.CM-03</group>
+  </rule>
+
+  <!-- Rule 100048: Regsvr32/Rundll32 Executing Remote Script -->
+  <rule id="100048" level="10">
+    <if_sid>61603</if_sid>
+    <regex type="pcre2" match="all">(?i)(regsvr32\.exe|rundll32\.exe)</regex>
+    <regex type="pcre2" match="all">(?i)(http(s)?:\/\/|scrobj\.dll|\/i:)</regex>
+    <description>Regsvr32/Rundll32 LOLBin executing remote script/payload (Signed Binary Proxy)</description>
+    <mitre>
+      <id>T1218</id>
+    </mitre>
+    <group>DE.AE-02, DE.CM-03</group>
+  </rule>
+
+</group>

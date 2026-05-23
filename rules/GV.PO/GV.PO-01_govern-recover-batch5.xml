@@ -1,0 +1,32 @@
+<!-- 
+  Batch 5: GV (Govern) & RC (Recover) Coverage (Rules 100049 - 100050)
+  NIST Focus: GV.PO-01, RC.RP-01
+-->
+
+<group name="windows, linux, syslog, security, nist_csf, mitre_attack,">
+
+  <!-- Rule 100049: Admin Account Used Outside Business Hours -->
+  <rule id="100049" level="8">
+    <if_sid>60106, 5715</if_sid> <!-- Win Logon (4624) or Linux sshd success -->
+    <regex type="pcre2" match="all">(?i)(TargetUserName.*Administrator|TargetUserName.*DomainAdmin|user=root)</regex>
+    <time>18:00 - 06:00</time> <!-- Outside normal business hours -->
+    <description>Administrator account logged in outside of standard business hours (Valid Accounts)</description>
+    <mitre>
+      <id>T1078</id>
+    </mitre>
+    <group>GV.PO-01, DE.CM-03</group>
+  </rule>
+
+  <!-- Rule 100050: Backup Process Failure or Unexpected Termination -->
+  <rule id="100050" level="12">
+    <if_sid>1002</if_sid> <!-- Catch-all for syslog/event logs if specific decoder matches -->
+    <regex type="pcre2" match="all">(?i)(veeam|rsync|bacula|windows\sbackup|wbadmin)</regex>
+    <regex type="pcre2" match="all">(?i)(failed|error|terminated\sunexpectedly|could\snot\scomplete|fatal)</regex>
+    <description>CRITICAL: Backup process failure or unexpected termination (Inhibit Recovery)</description>
+    <mitre>
+      <id>T1490</id>
+    </mitre>
+    <group>RC.RP-01, DE.CM-09</group>
+  </rule>
+
+</group>

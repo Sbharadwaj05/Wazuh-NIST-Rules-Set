@@ -13,13 +13,20 @@ Certain rules (like detecting audit log clearing or specific sensitive file acce
 You must enable these via Group Policy Object (GPO) or Local Security Policy (`secpol.msc`):
 *   **Audit File System**: Success/Failure (Required for file permission monitoring).
 *   **Audit Process Creation**: Success (Required if not using Sysmon).
-*   **Audit Logon Events**: Success/Failure (Required for rule `100016` and spray rule `100011`).
+*   **Audit Logon Events**: Success/Failure (Required for spray rule `100011`, Pass-the-Hash `100037`, Admin After Hours `100049`).
 *   **Audit System Events**: Success/Failure (Required to detect audit log clearing - rule `100009`).
+*   **Audit Account Management**: Success/Failure (Required for new local admin `100032`, account lockout `100040`).
+*   **Audit Directory Service Access**: Success/Failure (Required for DCSync `100038`).
+*   **Audit Kerberos Authentication Service**: Success/Failure (Required for Kerberoasting `100039`).
 
 ### 2. Install Microsoft Sysmon
 Several rules heavily rely on Sysmon for high-fidelity telemetry, notably:
-*   **Process Injection (Rule 100012)**: Relies on Sysmon Event ID 8 (CreateRemoteThread).
-*   **DNS C2 Domain (Rule 100013)**: Relies on Sysmon Event ID 22 (DNSEvent).
+*   **Process Creation (Event 1)**: Required for LOLBins (Certutil, Regsvr32), Mimikatz, PowerShell encoding, Schtasks, and VSSAdmin deletion.
+*   **Network Connection (Event 3)**: Required for beaconing detection (`100046`).
+*   **Process Injection (Event 8)**: Required for Rule `100012`.
+*   **Registry Events (Event 13)**: Required for Run key and RDP modifications (`100030`, `100033`).
+*   **WMI Activity (Event 19-21)**: Required for WMI event subscription persistence (`100034`).
+*   **DNS Query (Event 22)**: Required for C2 domains and DNS tunneling (`100013`, `100044`).
 
 **Prerequisite**: Install Sysmon with a robust configuration file (e.g., SwiftOnSecurity or SwiftOnSecurity-forked configs).
 ```powershell

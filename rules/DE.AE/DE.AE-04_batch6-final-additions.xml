@@ -1,0 +1,43 @@
+<!-- 
+  Batch 6: Final Additions to reach 50 Detections (Rules 100051 - 100053)
+  NIST Focus: DE.CM-09, DE.AE-02, DE.CM-03
+-->
+
+<group name="windows, sysmon, security, nist_csf, mitre_attack,">
+
+  <!-- Rule 100051: Sysmon Event Log Cleared -->
+  <rule id="100051" level="10">
+    <decoded_as>json</decoded_as>
+    <field name="win.system.eventID">104</field>
+    <field name="win.system.channel">Microsoft-Windows-Sysmon/Operational</field>
+    <description>Sysmon operational event log cleared</description>
+    <mitre>
+      <id>T1070.001</id>
+    </mitre>
+    <group>DE.CM-09, RS.MA-02</group>
+  </rule>
+
+  <!-- Rule 100052: Windows Defender Tampering via PowerShell -->
+  <rule id="100052" level="12">
+    <if_sid>61603</if_sid>
+    <regex type="pcre2" match="all">(?i)(Set-MpPreference|Add-MpPreference)</regex>
+    <regex type="pcre2" match="all">(?i)(-DisableRealtimeMonitoring\s*(\$true|1)|-ExclusionPath|-ExclusionProcess|-ExclusionExtension)</regex>
+    <description>CRITICAL: Windows Defender tampering detected (Defense Evasion)</description>
+    <mitre>
+      <id>T1562.001</id>
+    </mitre>
+    <group>DE.AE-02, PR.DS-01</group>
+  </rule>
+
+  <!-- Rule 100053: Execution from Recycle Bin -->
+  <rule id="100053" level="9">
+    <if_sid>61603, 60103</if_sid>
+    <regex type="pcre2" match="all">(?i)\\(\$Recycle\.bin|RECYCLER)\\</regex>
+    <description>Execution from the Recycle Bin detected (Defense Evasion/Persistence)</description>
+    <mitre>
+      <id>T1036</id>
+    </mitre>
+    <group>DE.CM-03, DE.AE-02</group>
+  </rule>
+
+</group>
