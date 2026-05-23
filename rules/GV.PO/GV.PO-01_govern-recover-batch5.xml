@@ -8,7 +8,7 @@
   <!-- Rule 100049: Admin Account Used Outside Business Hours -->
   <rule id="100049" level="8">
     <if_sid>60106, 5715</if_sid> <!-- Win Logon (4624) or Linux sshd success -->
-    <regex type="pcre2">(?i)(TargetUserName.*Administrator|TargetUserName.*DomainAdmin|user=root)</regex>
+    <regex type="pcre2">(?i)(TargetUserName.*(Administrator|DomainAdmin)|\bfor root\b)</regex>
     <time>18:00 - 06:00</time> <!-- Outside normal business hours -->
     <description>Administrator account logged in outside of standard business hours (Valid Accounts)</description>
     <mitre>
