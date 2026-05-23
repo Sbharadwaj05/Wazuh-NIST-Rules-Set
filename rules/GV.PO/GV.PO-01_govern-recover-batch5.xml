@@ -20,8 +20,7 @@
   <!-- Rule 100050: Backup Process Failure or Unexpected Termination -->
   <rule id="100050" level="12">
     <if_sid>1002</if_sid> <!-- Catch-all for syslog/event logs if specific decoder matches -->
-    <regex type="pcre2" match="all">(?i)(veeam|rsync|bacula|windows\sbackup|wbadmin)</regex>
-    <regex type="pcre2" match="all">(?i)(failed|error|terminated\sunexpectedly|could\snot\scomplete|fatal)</regex>
+    <regex type="pcre2" match="all">(?i)(veeam|rsync|bacula|windows\sbackup|wbadmin).*(failed|error|terminated\sunexpectedly|could\snot\scomplete|fatal)</regex>
     <description>CRITICAL: Backup process failure or unexpected termination (Inhibit Recovery)</description>
     <mitre>
       <id>T1490</id>

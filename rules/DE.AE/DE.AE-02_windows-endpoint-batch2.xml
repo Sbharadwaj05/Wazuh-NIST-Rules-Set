@@ -8,8 +8,7 @@
   <!-- Rule 100027: PowerShell Encoded Command Execution -->
   <rule id="100027" level="10">
     <if_sid>61603</if_sid> <!-- Base Sysmon Event 1 or Script Block 4104 -->
-    <regex type="pcre2" match="all">(?i)(powershell|pwsh)\.exe</regex>
-    <regex type="pcre2" match="all">(?i)(\-e(nc(oded(Command)?)?)?|\-e\s)</regex>
+    <regex type="pcre2" match="all">(?i)(powershell|pwsh)\.exe.*(\-e(nc(oded(Command)?)?)?|\-e\s)</regex>
     <description>PowerShell encoded command execution (Defense Evasion)</description>
     <mitre>
       <id>T1059.001</id>
@@ -31,8 +30,7 @@
   <!-- Rule 100029: Scheduled Task Created via Schtasks.exe -->
   <rule id="100029" level="8">
     <if_sid>61603, 60103</if_sid> <!-- Sysmon process create or Windows Security 4688 -->
-    <regex type="pcre2" match="all">(?i)schtasks\.exe</regex>
-    <regex type="pcre2" match="all">(?i)\/create</regex>
+    <regex type="pcre2" match="all">(?i)schtasks\.exe.*\/create</regex>
     <description>Scheduled task created via schtasks.exe (Persistence)</description>
     <mitre>
       <id>T1053.005</id>
@@ -54,8 +52,7 @@
   <!-- Rule 100031: Volume Shadow Copy Deleted -->
   <rule id="100031" level="14">
     <if_sid>61603, 60103</if_sid>
-    <regex type="pcre2" match="all">(?i)(vssadmin|wmic)</regex>
-    <regex type="pcre2" match="all">(?i)(delete\sshadows|shadowcopy\sdelete)</regex>
+    <regex type="pcre2" match="all">(?i)(vssadmin|wmic).*(delete\sshadows|shadowcopy\sdelete)</regex>
     <description>CRITICAL: Volume shadow copy deleted, possible Ransomware activity (Inhibit System Recovery)</description>
     <mitre>
       <id>T1490</id>
