@@ -170,7 +170,7 @@ log_definitions = {
         "benign": '{"win":{"system":{"eventID":"4769","providerName":"Microsoft-Windows-Security-Auditing"},"eventdata":{"ticketOptions":"0x40810000","ticketEncryptionType":"0x18"}}}\n'
     },
     "de-ae-02/lockouts": {
-        "trigger": '{"win":{"system":{"eventID":"4740","providerName":"Microsoft-Windows-Security-Auditing"},"eventdata":{"ipAddress":"10.0.0.5"}}}\n'*5,
+        "trigger": '{"win":{"system":{"eventID":"4740","providerName":"Microsoft-Windows-Security-Auditing"},"eventdata":{"ipAddress":"10.0.0.5"}}}\n'*8,
         "benign": '{"win":{"system":{"eventID":"4624","providerName":"Microsoft-Windows-Security-Auditing"},"eventdata":{"ipAddress":"10.0.0.5"}}}\n'
     },
     "pr-aa-05/linux-shadow": {
@@ -210,7 +210,7 @@ log_definitions = {
         "benign": '{"win":{"system":{"eventID":"4624","providerName":"Microsoft-Windows-Security-Auditing"},"eventdata":{"targetUserName":"Guest"}}}\n'
     },
     "rc-rp-01/backup-fail": {
-        "trigger": 'Dec 10 14:30:00 server veeam: Backup job failed terminated unexpectedly\n',
+        "trigger": 'Dec 10 14:30:00 server veeam: Backup job error terminated unexpectedly\n',
         "benign": 'Dec 10 14:30:00 server veeam: Backup job completed successfully\n'
     }
 }

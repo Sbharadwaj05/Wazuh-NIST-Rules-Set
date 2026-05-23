@@ -38,7 +38,7 @@
     <decoded_as>json</decoded_as>
     <field name="win.system.providerName">Microsoft-Windows-Sysmon</field>
     <field name="win.system.eventID">^1$</field>
-    <regex type="pcre2">(?i)\\(\$Recycle\.bin|RECYCLER)\\</regex>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)\\(\$Recycle\.bin|RECYCLER)\\</field>
     <description>Execution from the Recycle Bin detected (Defense Evasion/Persistence)</description>
     <mitre>
       <id>T1036</id>
