@@ -95,31 +95,6 @@ This pack provides coverage across **Identify (ID)**, **Protect (PR)**, **Detect
 | `100052` | DE.AE-02, PR.DS-01 | T1562.001 | Windows Defender Tampering via PowerShell | windows_sysmon | Critical |
 | `100053` | DE.CM-03, DE.AE-02 | T1036 (Masquerading) | Execution from Recycle Bin | windows_sysmon | High |
 
----------|---------------|---------------|-------------------|------------------|----------|
-| `100018` | DE.CM-01 | T1110.001 | SSH Brute Force (5+ Failures) | Linux `sshd` | High |
-| `100011` | DE.AE-02, DE.CM-03 | T1110.003 | Windows Logon Spray (Multi-Account) | Win Security (4625) | Medium |
-| `100002` | PR.AA-05, DE.CM-03 | T1548.003 | Sudo Privilege Escalation (Interactive Shell) | Linux `sudo` | Medium |
-| `100003` | PR.AA-01, DE.CM-03 | T1136.001 | New User Account Created | Linux `syslog` | Medium |
-| `100004` | DE.CM-09, PR.DS-01 | T1053.003 | Cron Job Modification | Linux `auditd` | Medium |
-| `100005` | DE.CM-01, DE.AE-03 | T1048 | Outbound Connection to Monitored Port | Linux `iptables` | Medium |
-| `100006` | PR.DS-01, DE.CM-03 | T1003.008 | Sensitive File Read (`/etc/shadow`) | Linux `auditd` | High |
-| `100007` | DE.AE-02, RS.MA-02 | T1505.003 | Web Shell Indicators in HTTP Requests | Nginx/Apache logs | High |
-| `100008` | DE.AE-03, PR.DS-02 | T1030 | Large File Exfiltration (>=100MB) | Proxy Logs | Medium |
-| `100009` | DE.CM-09, RS.MA-02 | T1070.001 | Windows Audit Log Cleared (Event 1102) | Win Security | High |
-| `100010` | DE.CM-01, DE.AE-02 | T1021.002 | PSExec Lateral Movement | Win Security (5145) | High |
-| `100012` | DE.AE-02, RS.AN-08 | T1055 | Process Injection Indicator (Sysmon Event 8) | Win Sysmon | High |
-| `100013` | ID.RA-03, DE.CM-01 | T1071.004 | DNS Query to Known C2 Domain | Win Sysmon (22) | High |
-| `100014` | PR.DS-01, PR.AA-05 | T1222.002 | Sensitive File Permission Change (`chmod`) | Linux `auditd` | Medium |
-| `100015` | DE.CM-09, DE.AE-03 | T1543.003 | Service Installed Outside Business Hours | Win System (7045) | Medium |
-| `100019` | PR.DS-01, DE.CM-09 | T1098 | `/etc/passwd` Modified | Linux `auditd` | High |
-| `100020` | PR.DS-01, DE.CM-09 | T1003.008 | `/etc/shadow` Modified | Linux `auditd` | Critical |
-| `100021` | PR.AA-05, DE.CM-09 | T1098.004 | SSH `authorized_keys` Modified | Linux `auditd` | High |
-| `100022` | PR.AA-05, DE.AE-02 | T1548.001 | SUID/SGID Bit Set on Binary | Linux `auditd` | High |
-| `100023` | DE.CM-09, DE.AE-02 | T1547.006 | Kernel Module Loaded (`insmod`/`modprobe`) | Linux `syslog` | High |
-| `100024` | DE.CM-09, RS.MA-02 | T1070.002 | Log File Deleted or Truncated | Linux `auditd` | High |
-| `100025` | DE.AE-02, DE.CM-03 | T1059 | Execution from `/tmp` or `/dev/shm` | Linux `auditd` | Medium |
-| `100026` | DE.CM-09, PR.DS-01 | T1053.003 | Root Crontab Modification | Linux `auditd` | Critical |
-
 ---
 
 ## 🚀 Quick Start
