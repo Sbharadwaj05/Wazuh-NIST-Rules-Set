@@ -53,11 +53,17 @@
     <group>DE.CM-01, DE.AE-03</group>
   </rule>
 
+  <!-- Helper Rule 100054: IPv4 network connection helper -->
+  <rule id="100054" level="0">
+    <if_sid>61605</if_sid> <!-- Sysmon Network Connect (Event 3) -->
+    <regex type="pcre2" match="all">(?i)DestinationIsIpv6.*false</regex> <!-- Ignore local/IPv6 noise -->
+    <description>Helper for Beaconing (IPv4 connection)</description>
+  </rule>
+
   <!-- Rule 100046: Beaconing Behaviour -->
   <rule id="100046" level="9" frequency="20" timeframe="600">
     <!-- Detects frequent connections to the same external IP within a 10m window -->
-    <if_sid>61605</if_sid> <!-- Sysmon Network Connect (Event 3) -->
-    <regex type="pcre2" match="all">(?i)DestinationIsIpv6.*false</regex> <!-- Ignore local/IPv6 noise -->
+    <if_matched_sid>100054</if_matched_sid>
     <same_source_ip />
     <description>Potential beaconing behaviour: high frequency connections to same host (Command and Control)</description>
     <mitre>
