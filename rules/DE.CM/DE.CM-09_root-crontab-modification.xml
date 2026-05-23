@@ -29,13 +29,13 @@
 <group name="nist_csf,de.cm-09,cron,auditd">
 
   <rule id="100026" level="10">
-    <if_sid>100004</if_sid>
+    <if_sid>80700</if_sid>
     <regex type="pcre2">path=(/var/spool/cron/(crontabs/)?root|/etc/crontab)</regex>
-    <description>Critical: Root crontab modification detected (Persistence)</description>
+    <description>Root crontab modification detected (Persistence)</description>
     <mitre>
       <id>T1053.003</id>
     </mitre>
-    <group>persistence,cron,nist_de.cm-09,nist_pr.ds-01</group>
+    <group>DE.CM-09, PR.AC-04</group>
   </rule>
 
 </group>

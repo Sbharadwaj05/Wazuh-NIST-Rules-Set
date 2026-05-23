@@ -30,14 +30,15 @@
 
   <!-- Rule 100044: DNS Tunneling Indicators -->
   <rule id="100044" level="10">
-    <if_sid>61625, 80700</if_sid> <!-- Sysmon DNS (Event 22) or equivalent syslog DNS logic -->
-    <!-- Look for DNS queries exceeding 40 characters in subdomains -->
-    <regex type="pcre2">(?i)QueryName.*[A-Za-z0-9\-\.]{40,}\.(com|net|org|io|xyz)</regex>
-    <description>DNS tunneling indicators: Anomalously long subdomain query (Command and Control)</description>
+    <decoded_as>json</decoded_as>
+    <field name="win.system.providerName">Microsoft-Windows-Sysmon</field>
+    <field name="win.system.eventID">^22$</field>
+    <field name="win.eventdata.queryName" type="pcre2">(?i)[A-Za-z0-9\-\.]{40,}\.(com|net|org|io|xyz)</field>
+    <description>Suspiciously long DNS query indicating potential DNS Tunneling (C2)</description>
     <mitre>
       <id>T1071.004</id>
     </mitre>
-    <group>DE.CM-01, DE.AE-03</group>
+    <group>DE.AE-03, RS.AN-01</group>
   </rule>
 
   <!-- Rule 100045: TOR Exit Node Connection -->
@@ -55,9 +56,11 @@
 
   <!-- Helper Rule 100054: IPv4 network connection helper -->
   <rule id="100054" level="0">
-    <if_sid>61605</if_sid> <!-- Sysmon Network Connect (Event 3) -->
-    <regex type="pcre2">(?i)DestinationIsIpv6.*false</regex> <!-- Ignore local/IPv6 noise -->
-    <description>Helper for Beaconing (IPv4 connection)</description>
+    <decoded_as>json</decoded_as>
+    <field name="win.system.providerName">Microsoft-Windows-Sysmon</field>
+    <field name="win.system.eventID">^3$</field>
+    <field name="win.eventdata.destinationIsIpv6">false</field>
+    <description>Helper: Sysmon Network Connection IPv4</description>
   </rule>
 
   <!-- Rule 100046: Beaconing Behaviour -->
@@ -74,24 +77,28 @@
 
   <!-- Rule 100047: Certutil Used to Download File -->
   <rule id="100047" level="10">
-    <if_sid>61603</if_sid>
-    <regex type="pcre2">(?i)certutil\.exe.*(\-urlcache|\-split|\-f|http(s)?:\/\/)</regex>
-    <description>Certutil LOLBin used to download remote file (Ingress Tool Transfer)</description>
+    <decoded_as>json</decoded_as>
+    <field name="win.system.providerName">Microsoft-Windows-Sysmon</field>
+    <field name="win.system.eventID">^1$</field>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)certutil\.exe.*(\-urlcache|\-split|\-f|http(s)?:\/\/)</field>
+    <description>Certutil used to download remote payload (C2/Defense Evasion)</description>
     <mitre>
       <id>T1105</id>
     </mitre>
-    <group>DE.AE-02, DE.CM-03</group>
+    <group>DE.AE-02, DE.CM-01</group>
   </rule>
 
   <!-- Rule 100048: Regsvr32/Rundll32 Executing Remote Script -->
   <rule id="100048" level="10">
-    <if_sid>61603</if_sid>
-    <regex type="pcre2">(?i)(regsvr32\.exe|rundll32\.exe).*(http(s)?:\/\/|scrobj\.dll|\/i:)</regex>
-    <description>Regsvr32/Rundll32 LOLBin executing remote script/payload (Signed Binary Proxy)</description>
+    <decoded_as>json</decoded_as>
+    <field name="win.system.providerName">Microsoft-Windows-Sysmon</field>
+    <field name="win.system.eventID">^1$</field>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)(regsvr32\.exe|rundll32\.exe).*(http(s)?:\/\/|scrobj\.dll|\/i:)</field>
+    <description>Regsvr32/Rundll32 remote script execution (Defense Evasion)</description>
     <mitre>
-      <id>T1218</id>
+      <id>T1218.010</id>
     </mitre>
-    <group>DE.AE-02, DE.CM-03</group>
+    <group>DE.AE-02, DE.CM-01</group>
   </rule>
 
 </group>

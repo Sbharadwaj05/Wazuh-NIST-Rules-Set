@@ -110,8 +110,8 @@ log_definitions = {
         "benign": '{"win":{"system":{"eventID":"105","channel":"Microsoft-Windows-Sysmon/Operational"}}}'
     },
     "de-ae-04/windows-defender-tampering": {
-        "trigger": '{"win":{"system":{"eventID":"1"}, "eventdata":{"commandLine":"powershell.exe Set-MpPreference -DisableRealtimeMonitoring $true"}}}',
-        "benign": '{"win":{"system":{"eventID":"1"}, "eventdata":{"commandLine":"powershell.exe Get-Process"}}}'
+        "trigger": '{"win":{"system":{"providerName":"Microsoft-Windows-Sysmon", "eventID":"1"}, "eventdata":{"commandLine":"powershell.exe Set-MpPreference -DisableRealtimeMonitoring $true"}}}',
+        "benign": '{"win":{"system":{"providerName":"Microsoft-Windows-Sysmon", "eventID":"1"}, "eventdata":{"commandLine":"powershell.exe Get-Process"}}}'
     },
     "de-ae-04/execution-from-recycle-bin": {
         "trigger": '{"win":{"system":{"eventID":"1"}, "eventdata":{"commandLine":"C:\\\\$Recycle.bin\\\\malware.exe"}}}',
