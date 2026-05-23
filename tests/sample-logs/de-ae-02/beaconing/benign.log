@@ -1,1 +1,1 @@
-{"win":{"system":{"eventID":"3","providerName":"Microsoft-Windows-Sysmon"},"eventdata":{"destinationIsIpv6":"false","destinationIp":"8.8.8.8"}}}
+{"win":{"system":{"eventID":"1","providerName":"Microsoft-Windows-Sysmon"},"eventdata":{"commandLine":"notepad.exe","destinationIsIpv6":"false"}}}
