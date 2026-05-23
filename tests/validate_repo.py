@@ -35,7 +35,8 @@ def validate():
                                 "id": rule_id,
                                 "level": rule.get("level"),
                                 "path": path,
-                                "name": rule.findtext("description", "No description")
+                                "name": rule.findtext("description", "No description"),
+                                "no_log": "no_log" in (rule.findtext("options") or "")
                             }
                 except Exception as e:
                     print(f"[ERROR] Failed to parse XML file {path}: {e}")
@@ -43,8 +44,8 @@ def validate():
     print(f"[OK] Found {len(xml_rules)} total rules across XML files.")
     
     # 3. Check for silent helpers
-    alerting_xml_rules = {rid: r for rid, r in xml_rules.items() if int(r["level"]) > 0}
-    silent_helpers = {rid: r for rid, r in xml_rules.items() if int(r["level"]) == 0}
+    alerting_xml_rules = {rid: r for rid, r in xml_rules.items() if int(r["level"]) > 0 and not r["no_log"]}
+    silent_helpers = {rid: r for rid, r in xml_rules.items() if int(r["level"]) == 0 or r["no_log"]}
     print(f"   - Alerting Rules: {len(alerting_xml_rules)}")
     print(f"   - Silent Helper Rules: {len(silent_helpers)} (IDs: {', '.join(silent_helpers.keys())})")
     
@@ -67,8 +68,8 @@ def validate():
     with open("README.md", "r", encoding="utf-8") as f:
         readme_content = f.read()
         
-    # Extract IDs from README table (looking for `1000xx`)
-    readme_ids = set(re.findall(r'`(1000\d{2})`', readme_content))
+    # Extract IDs from README table
+    readme_ids = set(re.findall(r'\|\s*(1000\d{2})\s*\|', readme_content))
     print(f"[OK] Found {len(readme_ids)} rule IDs in README.md")
     
     readme_missing = mapped_rule_ids - readme_ids
