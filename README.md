@@ -161,10 +161,11 @@ This repository includes a testing harness designed to run positive (trigger) an
 
 To help SOC analysts, detection engineers, and IT administrators properly deploy and maintain this ruleset, we have thoroughly documented the required system configurations, rule internals, and troubleshooting lessons learned:
 
-1. **[Agent Configuration & Prerequisites](docs/prerequisites.md)**: Essential guide on how to configure Windows (Audit Policy, Sysmon, EventChannels) and Linux (`auditd`, `iptables`, `syslog`) endpoints to generate the telemetry required by these rules.
-2. **[Detection Rule Catalog](docs/rule-catalog.md)**: A detailed breakdown of all 50 active rules, including the specific logs they evaluate, MITRE mappings, and threshold tuning instructions.
-3. **[Troubleshooting & Lessons Learned](docs/troubleshooting.md)**: A deep-dive masterclass into Wazuh's rules engine quirks (e.g., decoder shadowing, JSON parsing differences, level 0 invisible correlation). Read this if you plan to modify or extend the rules!
-4. **[Deployment Architecture](docs/deployment-guide.md)**: How to install the rules, lists, and custom decoders on your Wazuh manager.
+1. **[Changelog & Updates](CHANGELOG.md)**: A complete history of rule additions, telemetry changes, and bug fixes across all versions.
+2. **[Agent Configuration & Prerequisites](docs/prerequisites.md)**: Essential guide on how to configure Windows (Audit Policy, Sysmon, EventChannels) and Linux (`auditd`, `iptables`, `syslog`) endpoints to generate the telemetry required by these rules.
+3. **[Detection Rule Catalog](docs/rule-catalog.md)**: A detailed breakdown of all 50 active rules, including the specific logs they evaluate, MITRE mappings, and threshold tuning instructions.
+4. **[Troubleshooting & Lessons Learned](docs/troubleshooting.md)**: A deep-dive masterclass into Wazuh's rules engine quirks (e.g., decoder shadowing, JSON parsing differences, level 0 invisible correlation). Read this if you plan to modify or extend the rules!
+5. **[Deployment Architecture](docs/deployment-guide.md)**: How to install the rules, lists, and custom decoders on your Wazuh manager.
 
 ---
 
