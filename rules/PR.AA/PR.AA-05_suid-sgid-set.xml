@@ -29,8 +29,7 @@
 
   <rule id="100022" level="9">
     <if_sid>80700</if_sid>
-    <regex type="pcre2">key="perm_mod"</regex>
-    <regex type="pcre2">(a2|mode)=0?[426][0-7]{3}</regex>
+    <regex type="pcre2">key="perm_mod".*(a2|mode)=0?[426][0-7]{3}</regex>
     <description>SUID/SGID bit set on file (Potential Privilege Escalation)</description>
     <mitre>
       <id>T1548.001</id>

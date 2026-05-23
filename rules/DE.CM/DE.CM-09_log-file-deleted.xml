@@ -29,8 +29,7 @@
 
   <rule id="100024" level="9">
     <if_sid>80700</if_sid>
-    <regex type="pcre2">(exe|comm)="(rm|truncate|shred|unlink)"</regex>
-    <regex type="pcre2">(path|name)="/var/log/.*"</regex>
+    <regex type="pcre2">(exe|comm)="(rm|truncate|shred|unlink)".*(path|name)="/var/log/.*"</regex>
     <description>Log file deleted or truncated (Defense Evasion)</description>
     <mitre>
       <id>T1070.002</id>

@@ -29,8 +29,7 @@
 
   <rule id="100021" level="8">
     <if_sid>80700</if_sid>
-    <regex type="pcre2">path=.*\.ssh/authorized_keys</regex>
-    <regex type="pcre2">perm=(w|a|wa|aw)</regex>
+    <regex type="pcre2">path=.*\.ssh/authorized_keys.*perm=(w|a|wa|aw)</regex>
     <description>SSH authorized_keys file modified (Persistence)</description>
     <mitre>
       <id>T1098.004</id>

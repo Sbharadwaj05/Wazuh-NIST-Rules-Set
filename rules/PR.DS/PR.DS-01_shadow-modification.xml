@@ -29,8 +29,7 @@
 
   <rule id="100020" level="12">
     <if_sid>80700</if_sid>
-    <regex type="pcre2">path=/etc/shadow</regex>
-    <regex type="pcre2">perm=(w|a|wa|aw)</regex>
+    <regex type="pcre2">path=/etc/shadow.*perm=(w|a|wa|aw)</regex>
     <description>Critical: Modification to /etc/shadow detected</description>
     <mitre>
       <id>T1003.008</id>
