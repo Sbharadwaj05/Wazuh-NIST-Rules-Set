@@ -153,8 +153,8 @@ run_test 100038 "tests/sample-logs/id-ra-03/dcsync/benign.log" false "DCSync - b
 run_test 100039 "tests/sample-logs/id-ra-03/kerberoasting/trigger.log" true "Kerberoasting - trigger"
 run_test 100039 "tests/sample-logs/id-ra-03/kerberoasting/benign.log" false "Kerberoasting - benign"
 
-run_test 100040 "tests/sample-logs/de-ae-02/lockouts/trigger.log" true "Multiple Lockouts (100040 helper) - trigger"
-run_test 100040 "tests/sample-logs/de-ae-02/lockouts/benign.log" false "Multiple Lockouts - benign"
+run_test 100055 "tests/sample-logs/de-ae-02/lockouts/trigger.log" true "Multiple Lockouts (100055 helper) - trigger"
+run_test 100055 "tests/sample-logs/de-ae-02/lockouts/benign.log" false "Multiple Lockouts - benign"
 
 run_test 100041 "tests/sample-logs/pr-aa-05/linux-shadow/trigger.log" true "Linux Shadow Read - trigger"
 run_test 100041 "tests/sample-logs/pr-aa-05/linux-shadow/benign.log" false "Linux Shadow Read - benign"

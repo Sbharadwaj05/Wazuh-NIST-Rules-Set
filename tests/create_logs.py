@@ -114,8 +114,8 @@ log_definitions = {
         "benign": '{"win":{"system":{"providerName":"Microsoft-Windows-Sysmon", "eventID":"1"}, "eventdata":{"commandLine":"powershell.exe Get-Process"}}}'
     },
     "de-ae-04/execution-from-recycle-bin": {
-        "trigger": '{"win":{"system":{"eventID":"1"}, "eventdata":{"commandLine":"C:\\\\$Recycle.bin\\\\malware.exe"}}}',
-        "benign": '{"win":{"system":{"eventID":"1"}, "eventdata":{"commandLine":"C:\\\\Windows\\\\System32\\\\cmd.exe"}}}'
+        "trigger": '{"win":{"system":{"providerName":"Microsoft-Windows-Sysmon", "eventID":"1"}, "eventdata":{"commandLine":"C:\\\\$Recycle.bin\\\\malware.exe"}}}\n',
+        "benign": '{"win":{"system":{"providerName":"Microsoft-Windows-Sysmon", "eventID":"1"}, "eventdata":{"commandLine":"C:\\\\Windows\\\\System32\\\\cmd.exe"}}}\n'
     }
     ,"de-ae-02/powershell-encoded": {
         "trigger": '{"win":{"system":{"eventID":"1","providerName":"Microsoft-Windows-Sysmon"},"eventdata":{"commandLine":"powershell.exe -enc JABzAD0ATgBlAHcALQBPAGIAagBlAGMAdAAgAEkATwAuAE0AZQBtAG8AcgB5AFMAdAByAGUAYQBtACgAWwBDAG8AbgB2AGUAcgB0AF0AOgA6AEYAcgBvAG0AQgBhAHMAZQA2ADQAUwB0AHIAaQBuAGcAKAAiAEgA"}}}\n',
@@ -131,7 +131,7 @@ log_definitions = {
     },
     "de-ae-02/registry-run": {
         "trigger": '{"win":{"system":{"eventID":"13","providerName":"Microsoft-Windows-Sysmon"},"eventdata":{"targetObject":"HKLM\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run\\\\malware"}}}\n',
-        "benign": '{"win":{"system":{"eventID":"13","providerName":"Microsoft-Windows-Sysmon"},"eventdata":{"targetObject":"HKLM\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Run\\\\legit"}}}\n'
+        "benign": '{"win":{"system":{"eventID":"13","providerName":"Microsoft-Windows-Sysmon"},"eventdata":{"targetObject":"HKLM\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Explorer\\\\legit"}}}\n'
     },
     "de-ae-02/vssadmin-delete": {
         "trigger": '{"win":{"system":{"eventID":"1","providerName":"Microsoft-Windows-Sysmon"},"eventdata":{"commandLine":"vssadmin delete shadows /all /quiet"}}}\n',
