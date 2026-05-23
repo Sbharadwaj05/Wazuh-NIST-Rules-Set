@@ -1144,11 +1144,19 @@
         ]
       },
       "mitre_attack": {
+        "tactic": "Defense Evasion",
         "technique_id": "T1070.001",
         "technique_name": "Indicator Removal: Clear Windows Event Logs"
       },
       "log_source": "windows_eventchannel",
-      "severity": "high"
+      "os": [
+        "windows"
+      ],
+      "severity": "high",
+      "tags": [
+        "log_clearing",
+        "anti_forensics"
+      ]
     },
     {
       "wazuh_rule_id": "100052",
@@ -1160,11 +1168,19 @@
         ]
       },
       "mitre_attack": {
+        "tactic": "Defense Evasion",
         "technique_id": "T1562.001",
         "technique_name": "Impair Defenses: Disable or Modify Tools"
       },
       "log_source": "windows_sysmon",
-      "severity": "critical"
+      "os": [
+        "windows"
+      ],
+      "severity": "critical",
+      "tags": [
+        "defense_evasion",
+        "antivirus_bypass"
+      ]
     },
     {
       "wazuh_rule_id": "100053",
@@ -1176,11 +1192,19 @@
         ]
       },
       "mitre_attack": {
+        "tactic": "Defense Evasion",
         "technique_id": "T1036",
         "technique_name": "Masquerading"
       },
       "log_source": "windows_sysmon",
-      "severity": "high"
+      "os": [
+        "windows"
+      ],
+      "severity": "high",
+      "tags": [
+        "masquerading",
+        "persistence"
+      ]
     }
   ]
 }
