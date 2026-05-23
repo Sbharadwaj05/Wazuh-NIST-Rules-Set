@@ -1,1 +1,1 @@
-type=SYSCALL msg=audit(1779953402.123:461): path=/root/.ssh/known_hosts perm=r
+type=PATH msg=audit(1779953402.123:461): item=0 name="/root/.ssh/known_hosts" inode=1237 dev=08:01 mode=0100600 ouid=0 ogid=0 rdev=00:00 nametype=NORMAL perm=r

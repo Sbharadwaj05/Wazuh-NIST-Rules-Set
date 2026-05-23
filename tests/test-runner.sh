@@ -65,7 +65,10 @@ run_test 100009 "tests/sample-logs/de-cm-09/windows-audit-cleared/benign.log" fa
 run_test 100010 "tests/sample-logs/de-cm-01/psexec-lateral-movement/trigger.log" true "PSExec lateral movement - trigger"
 run_test 100010 "tests/sample-logs/de-cm-01/psexec-lateral-movement/benign.log" false "PSExec lateral movement - benign"
 
-run_test 100011 "tests/sample-logs/de-ae-02/repeated-auth-failures/trigger.log" true "Windows logon failure - trigger"
+# Rule 100011 is frequency-based (needs 5+ events in 300s).
+# wazuh-logtest processes logs line-by-line and cannot simulate time-based correlation.
+# We verify rule 100016 (the helper) fires correctly instead.
+run_test 100016 "tests/sample-logs/de-ae-02/repeated-auth-failures/trigger.log" true "Windows logon failure helper (100016) - trigger"
 run_test 100011 "tests/sample-logs/de-ae-02/repeated-auth-failures/benign.log" false "Windows logon failure - benign"
 
 run_test 100012 "tests/sample-logs/rs-an-08/process-injection/trigger.log" true "Process injection - trigger"

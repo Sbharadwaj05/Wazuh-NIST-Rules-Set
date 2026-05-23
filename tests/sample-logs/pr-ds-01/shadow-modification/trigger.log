@@ -1,1 +1,1 @@
-type=SYSCALL msg=audit(1779953401.123:460): path=/etc/shadow perm=w
+type=PATH msg=audit(1779953401.123:460): item=0 name="/etc/shadow" inode=1235 dev=08:01 mode=0100000 ouid=0 ogid=42 rdev=00:00 nametype=NORMAL perm=w

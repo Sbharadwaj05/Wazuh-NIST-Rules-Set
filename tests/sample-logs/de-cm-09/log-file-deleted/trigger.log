@@ -1,1 +1,2 @@
-type=SYSCALL msg=audit(1779953404.123:463): exe="rm" name="/var/log/auth.log"
+type=SYSCALL msg=audit(1779953404.123:463): arch=c000003e syscall=87 success=yes exit=0 a0=55a3b2d a1=0 a2=0 a3=0 items=1 ppid=1234 pid=2345 auid=0 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=pts0 ses=1 comm="rm" exe="/bin/rm" key=(null)
+type=PATH msg=audit(1779953404.123:463): item=0 name="/var/log/auth.log" inode=1239 dev=08:01 mode=0100640 ouid=0 ogid=4 rdev=00:00 nametype=NORMAL

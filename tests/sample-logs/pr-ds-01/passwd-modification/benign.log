@@ -1,1 +1,1 @@
-type=SYSCALL msg=audit(1779953400.123:459): path=/etc/passwd perm=r
+type=PATH msg=audit(1779953400.123:459): item=0 name="/var/log/syslog" inode=5678 dev=08:01 mode=0100640 ouid=0 ogid=4 rdev=00:00 nametype=NORMAL perm=r

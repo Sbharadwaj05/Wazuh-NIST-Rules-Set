@@ -1,1 +1,1 @@
-type=SYSCALL msg=audit(1779953406.123:465): path=/etc/crontab perm=w
+type=PATH msg=audit(1779953406.123:465): item=0 name="/etc/crontab" inode=1240 dev=08:01 mode=0100644 ouid=0 ogid=0 rdev=00:00 nametype=NORMAL perm=w

@@ -1,1 +1,1 @@
-{"win":{"system":{"eventID":"1"}, "eventdata":{"commandLine":"C:\\Windows\\System32\\cmd.exe"}}}
+{"win":{"system":{"eventID":"1","channel":"Microsoft-Windows-Sysmon/Operational","providerName":"Microsoft-Windows-Sysmon"},"eventdata":{"commandLine":"C:\\Windows\\System32\\cmd.exe"}}}

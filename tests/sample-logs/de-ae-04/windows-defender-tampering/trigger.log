@@ -1,1 +1,1 @@
-{"win":{"system":{"eventID":"1"}, "eventdata":{"commandLine":"powershell.exe Set-MpPreference -DisableRealtimeMonitoring $true"}}}
+{"win":{"system":{"eventID":"1","channel":"Microsoft-Windows-Sysmon/Operational","providerName":"Microsoft-Windows-Sysmon"},"eventdata":{"commandLine":"powershell.exe Set-MpPreference -DisableRealtimeMonitoring $true"}}}
