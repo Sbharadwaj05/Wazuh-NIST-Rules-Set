@@ -210,8 +210,8 @@ log_definitions = {
         "benign": '{"win":{"system":{"eventID":"4624","providerName":"Microsoft-Windows-Security-Auditing"},"eventdata":{"targetUserName":"Guest"}}}\n'
     },
     "rc-rp-01/backup-fail": {
-        "trigger": 'Dec 10 14:30:00 server veeam: Backup job error terminated unexpectedly\n',
-        "benign": 'Dec 10 14:30:00 server veeam: Backup job completed successfully\n'
+        "trigger": 'Dec 10 14:30:00 server syslog: windows backup error terminated unexpectedly\n',
+        "benign": 'Dec 10 14:30:00 server syslog: windows backup completed successfully\n'
     }
 }
 
