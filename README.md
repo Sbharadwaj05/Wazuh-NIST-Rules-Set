@@ -147,6 +147,9 @@ rules/          Custom Wazuh rule XMLs — 1 rule per file, organised by NIST CS
   PR.DS/        Data Security rules
   RC.RP/        Recovery rules
   RS.AN/        Incident Analysis rules
+```
+
+> **How rules are categorised:** Each rule is filed under its **primary** NIST subcategory (the first one listed in the table below). Many rules span multiple functions — for example, a rule may detect an access control violation (**PR.AA**) while also serving as continuous monitoring (**DE.CM**). All secondary mappings are still tagged in the rule's alert output and listed in the table. The folder simply reflects the rule's *dominant* compliance purpose.
 decoders/       Custom Wazuh decoder XML for non-standard log sources
 lists/          CDB list source files (C2 domains, rare egress ports)
 mappings/       Machine-readable JSON: rule ID → NIST CSF + MITRE ATT&CK
@@ -175,58 +178,60 @@ Coverage across **Identify (ID)**, **Protect (PR)**, **Detect (DE)**, **Govern (
 
 ### Detailed Rule Mapping
 
-| Rule ID | NIST CSF v2.0 | MITRE ATT&CK | Alert Description | Telemetry Source | Severity |
-|---------|---------------|---------------|-------------------|------------------|----------|
-| 100002 | PR.AA-05, DE.CM-03 | T1548.003 (Sudo Abuse) | Sudo Privilege Escalation | sudo | Medium |
-| 100003 | PR.AA-01, DE.CM-03 | T1136.001 (Create Local Account) | New User Account Created | syslog | Medium |
-| 100004 | DE.CM-09, PR.DS-01 | T1053.003 (Cron) | Cron Job Modification | auditd | Medium |
-| 100005 | DE.CM-01, DE.AE-03 | T1048 (Exfiltration Alt Protocol) | Outbound Connection to Rare Port | iptables | Medium |
-| 100006 | PR.DS-01, DE.CM-03 | T1003.008 (/etc/passwd & /etc/shadow) | Sensitive File Read | auditd | High |
-| 100007 | DE.AE-02, RS.MA-02 | T1505.003 (Web Shell) | Web Shell Indicators in HTTP | apache/nginx | High |
-| 100008 | DE.AE-03, PR.DS-02 | T1030 (Data Transfer Size Limits) | Large File Exfiltration (≥100MB) | proxy/web | Medium |
-| 100009 | DE.CM-09, RS.MA-02 | T1070.001 (Clear Windows Event Logs) | Windows Audit Log Cleared | windows_eventchannel | High |
-| 100010 | DE.CM-01, DE.AE-02 | T1021.002 (SMB/Windows Admin Shares) | PSExec Lateral Movement | windows_eventchannel | High |
-| 100011 | DE.AE-02, DE.CM-03 | T1110.003 (Password Spraying) | Repeated Authentication Failures | windows_eventchannel | Medium |
-| 100012 | DE.AE-02, RS.AN-08 | T1055 (Process Injection) | Process Injection Indicator (Sysmon) | windows_eventchannel | High |
-| 100013 | ID.RA-03, DE.CM-01 | T1071.004 (DNS C2) | DNS Query to Known C2 Domain | windows_eventchannel | High |
-| 100014 | PR.DS-01, PR.AA-05 | T1222.002 (File Permission Modification) | Sensitive File Permission Change | auditd | Medium |
-| 100015 | DE.CM-09, DE.AE-03 | T1543.003 (Windows Service) | Service Installed Outside Business Hours | windows_eventchannel | Medium |
-| 100018 | DE.CM-01, RS.MA-02 | T1110.001 (Password Guessing) | SSH Brute Force Detection | syslog | High |
-| 100019 | PR.DS-01, DE.CM-09 | T1098 (Account Manipulation) | /etc/passwd Modified | auditd | High |
-| 100020 | PR.DS-01, DE.CM-09 | T1003.008 (/etc/shadow) | /etc/shadow Modified | auditd | Critical |
-| 100021 | PR.AA-05, DE.CM-09 | T1098.004 (SSH Authorized Keys) | SSH authorized_keys Modified | auditd | High |
-| 100022 | PR.AA-05, DE.AE-02 | T1548.001 (Setuid and Setgid) | SUID/SGID Bit Set on Binary | auditd | High |
-| 100023 | DE.CM-09, DE.AE-02 | T1547.006 (Kernel Modules) | Kernel Module Loaded | syslog | High |
-| 100024 | DE.CM-09, RS.MA-02 | T1070.002 (Clear Linux Logs) | Log File Deleted or Truncated | auditd | High |
-| 100025 | DE.AE-02, DE.CM-03 | T1059 (Command and Scripting) | Execution from /tmp or /dev/shm | auditd | Medium |
-| 100026 | DE.CM-09, PR.DS-01 | T1053.003 (Cron) | Root Crontab Modification | auditd | Critical |
-| 100027 | DE.AE-02, DE.CM-03 | T1059.001 (PowerShell) | PowerShell Encoded Command | windows_sysmon | High |
-| 100028 | DE.AE-02, RS.MA-02 | T1059.001 (PowerShell) | PowerShell Download Cradle | windows_sysmon | High |
-| 100029 | DE.CM-09, DE.AE-02 | T1053.005 (Scheduled Task) | Schtasks Creation | windows_security | Medium |
-| 100030 | DE.CM-09, PR.DS-01 | T1547.001 (Registry Run Keys) | Registry Run Key Modification | windows_sysmon | High |
-| 100031 | DE.AE-02, RS.MA-02 | T1490 (Inhibit System Recovery) | Volume Shadow Copy Deleted | windows_security | Critical |
-| 100032 | PR.AA-01, DE.CM-03 | T1136.001 (Local Account) | New Local Admin Account | windows_security | High |
-| 100033 | PR.AA-05, DE.CM-09 | T1021.001 (RDP) | RDP Enabled via Registry | windows_sysmon | High |
-| 100034 | DE.CM-09, DE.AE-02 | T1546.003 (WMI Event Subscription) | WMI Event Subscription | windows_sysmon | High |
-| 100035 | DE.AE-02, PR.AA-05 | T1003.001 (LSASS Memory) | LSASS Memory Access | windows_sysmon | High |
-| 100036 | DE.AE-02, RS.MA-02 | T1003 (OS Credential Dumping) | Mimikatz Indicators | windows_sysmon | Critical |
-| 100037 | DE.AE-02, DE.CM-01 | T1550.002 (Pass the Hash) | Pass-the-Hash Indicators | windows_security | High |
-| 100038 | DE.AE-02, ID.RA-03 | T1003.006 (DCSync) | DCSync Attack | windows_security | Critical |
-| 100039 | DE.AE-02, ID.RA-03 | T1558.003 (Kerberoasting) | Kerberoasting Indicators | windows_security | High |
-| 100040 | DE.AE-02, DE.CM-03 | T1110 (Brute Force) | Multiple Account Lockouts | windows_security | Medium |
-| 100041 | PR.AA-05, DE.CM-03 | T1003.008 (/etc/passwd & /etc/shadow) | Linux /etc/passwd Read by Non-Root | auditd | Medium |
-| 100042 | DE.AE-02, RS.MA-02 | T1059.004 (Unix Shell) | Reverse Shell Spawned | auditd | High |
-| 100043 | DE.AE-02, DE.CM-03 | T1027 (Obfuscated Files or Information) | Base64 Encoded Command | auditd | Medium |
-| 100044 | DE.CM-01, DE.AE-03 | T1071.004 (DNS) | DNS Tunneling Indicators | windows_sysmon | High |
-| 100045 | DE.CM-01, DE.AE-03 | T1090.003 (Multi-hop Proxy: TOR) | TOR Exit Node Connection | iptables | High |
-| 100046 | DE.AE-02, DE.CM-01 | T1071.001 (Web Protocols) | Beaconing Behaviour | windows_sysmon | Medium |
-| 100047 | DE.AE-02, DE.CM-03 | T1105 (Ingress Tool Transfer) | Certutil Used to Download File | windows_sysmon | High |
-| 100048 | DE.AE-02, DE.CM-03 | T1218 (Signed Binary Proxy Execution) | Regsvr32 Executing Remote Script | windows_sysmon | High |
-| 100049 | GV.PO-01, DE.CM-03 | T1078 (Valid Accounts) | Admin Account Used Outside Business Hours | windows_security | Medium |
-| 100050 | RC.RP-01, DE.CM-09 | T1490 (Inhibit System Recovery) | Backup Process Failure | syslog | High |
-| 100051 | DE.CM-09, RS.MA-02 | T1070.001 (Clear Windows Event Logs) | Sysmon Event Log Cleared | windows_eventchannel | High |
-| 100052 | DE.AE-02, PR.DS-01 | T1562.001 (Impair Defenses) | Windows Defender Tampering via PowerShell | windows_sysmon | Critical |
-| 100053 | DE.CM-03, DE.AE-02 | T1036 (Masquerading) | Execution from Recycle Bin | windows_sysmon | High |
+> 🪟 = Windows &nbsp;&nbsp; 🐧 = Linux &nbsp;&nbsp; 🌐 = Cross-platform
+
+| Rule ID | NIST CSF v2.0 | MITRE ATT&CK | Alert Description | Telemetry Source | OS | Severity |
+|---------|---------------|---------------|-------------------|------------------|----|----------|
+| 100002 | PR.AA-05, DE.CM-03 | T1548.003 (Sudo Abuse) | Sudo Privilege Escalation | sudo | 🐧 | Medium |
+| 100003 | PR.AA-01, DE.CM-03 | T1136.001 (Create Local Account) | New User Account Created | syslog | 🐧 | Medium |
+| 100004 | DE.CM-09, PR.DS-01 | T1053.003 (Cron) | Cron Job Modification | auditd | 🐧 | Medium |
+| 100005 | DE.CM-01, DE.AE-03 | T1048 (Exfiltration Alt Protocol) | Outbound Connection to Rare Port | iptables | 🐧 | Medium |
+| 100006 | PR.DS-01, DE.CM-03 | T1003.008 (/etc/passwd & /etc/shadow) | Sensitive File Read | auditd | 🐧 | High |
+| 100007 | DE.AE-02, RS.MA-02 | T1505.003 (Web Shell) | Web Shell Indicators in HTTP | apache/nginx | 🌐 | High |
+| 100008 | DE.AE-03, PR.DS-02 | T1030 (Data Transfer Size Limits) | Large File Exfiltration (≥100MB) | proxy/web | 🌐 | Medium |
+| 100009 | DE.CM-09, RS.MA-02 | T1070.001 (Clear Windows Event Logs) | Windows Audit Log Cleared | windows_eventchannel | 🪟 | High |
+| 100010 | DE.CM-01, DE.AE-02 | T1021.002 (SMB/Windows Admin Shares) | PSExec Lateral Movement | windows_eventchannel | 🪟 | High |
+| 100011 | DE.AE-02, DE.CM-03 | T1110.003 (Password Spraying) | Repeated Authentication Failures | windows_eventchannel | 🪟 | Medium |
+| 100012 | DE.AE-02, RS.AN-08 | T1055 (Process Injection) | Process Injection Indicator (Sysmon) | windows_eventchannel | 🪟 | High |
+| 100013 | ID.RA-03, DE.CM-01 | T1071.004 (DNS C2) | DNS Query to Known C2 Domain | windows_eventchannel | 🪟 | High |
+| 100014 | PR.DS-01, PR.AA-05 | T1222.002 (File Permission Modification) | Sensitive File Permission Change | auditd | 🐧 | Medium |
+| 100015 | DE.CM-09, DE.AE-03 | T1543.003 (Windows Service) | Service Installed Outside Business Hours | windows_eventchannel | 🪟 | Medium |
+| 100018 | DE.CM-01, RS.MA-02 | T1110.001 (Password Guessing) | SSH Brute Force Detection | syslog | 🐧 | High |
+| 100019 | PR.DS-01, DE.CM-09 | T1098 (Account Manipulation) | /etc/passwd Modified | auditd | 🐧 | High |
+| 100020 | PR.DS-01, DE.CM-09 | T1003.008 (/etc/shadow) | /etc/shadow Modified | auditd | 🐧 | Critical |
+| 100021 | PR.AA-05, DE.CM-09 | T1098.004 (SSH Authorized Keys) | SSH authorized_keys Modified | auditd | 🐧 | High |
+| 100022 | PR.AA-05, DE.AE-02 | T1548.001 (Setuid and Setgid) | SUID/SGID Bit Set on Binary | auditd | 🐧 | High |
+| 100023 | DE.CM-09, DE.AE-02 | T1547.006 (Kernel Modules) | Kernel Module Loaded | syslog | 🐧 | High |
+| 100024 | DE.CM-09, RS.MA-02 | T1070.002 (Clear Linux Logs) | Log File Deleted or Truncated | auditd | 🐧 | High |
+| 100025 | DE.AE-02, DE.CM-03 | T1059 (Command and Scripting) | Execution from /tmp or /dev/shm | auditd | 🐧 | Medium |
+| 100026 | DE.CM-09, PR.DS-01 | T1053.003 (Cron) | Root Crontab Modification | auditd | 🐧 | Critical |
+| 100027 | DE.AE-02, DE.CM-03 | T1059.001 (PowerShell) | PowerShell Encoded Command | windows_sysmon | 🪟 | High |
+| 100028 | DE.AE-02, RS.MA-02 | T1059.001 (PowerShell) | PowerShell Download Cradle | windows_sysmon | 🪟 | High |
+| 100029 | DE.CM-09, DE.AE-02 | T1053.005 (Scheduled Task) | Schtasks Creation | windows_security | 🪟 | Medium |
+| 100030 | DE.CM-09, PR.DS-01 | T1547.001 (Registry Run Keys) | Registry Run Key Modification | windows_sysmon | 🪟 | High |
+| 100031 | DE.AE-02, RS.MA-02 | T1490 (Inhibit System Recovery) | Volume Shadow Copy Deleted | windows_security | 🪟 | Critical |
+| 100032 | PR.AA-01, DE.CM-03 | T1136.001 (Local Account) | New Local Admin Account | windows_security | 🪟 | High |
+| 100033 | PR.AA-05, DE.CM-09 | T1021.001 (RDP) | RDP Enabled via Registry | windows_sysmon | 🪟 | High |
+| 100034 | DE.CM-09, DE.AE-02 | T1546.003 (WMI Event Subscription) | WMI Event Subscription | windows_sysmon | 🪟 | High |
+| 100035 | DE.AE-02, PR.AA-05 | T1003.001 (LSASS Memory) | LSASS Memory Access | windows_sysmon | 🪟 | High |
+| 100036 | DE.AE-02, RS.MA-02 | T1003 (OS Credential Dumping) | Mimikatz Indicators | windows_sysmon | 🪟 | Critical |
+| 100037 | DE.AE-02, DE.CM-01 | T1550.002 (Pass the Hash) | Pass-the-Hash Indicators | windows_security | 🪟 | High |
+| 100038 | DE.AE-02, ID.RA-03 | T1003.006 (DCSync) | DCSync Attack | windows_security | 🪟 | Critical |
+| 100039 | DE.AE-02, ID.RA-03 | T1558.003 (Kerberoasting) | Kerberoasting Indicators | windows_security | 🪟 | High |
+| 100040 | DE.AE-02, DE.CM-03 | T1110 (Brute Force) | Multiple Account Lockouts | windows_security | 🪟 | Medium |
+| 100041 | PR.AA-05, DE.CM-03 | T1003.008 (/etc/passwd & /etc/shadow) | Linux /etc/passwd Read by Non-Root | auditd | 🐧 | Medium |
+| 100042 | DE.AE-02, RS.MA-02 | T1059.004 (Unix Shell) | Reverse Shell Spawned | auditd | 🐧 | High |
+| 100043 | DE.AE-02, DE.CM-03 | T1027 (Obfuscated Files or Information) | Base64 Encoded Command | auditd | 🐧 | Medium |
+| 100044 | DE.CM-01, DE.AE-03 | T1071.004 (DNS) | DNS Tunneling Indicators | windows_sysmon | 🪟 | High |
+| 100045 | DE.CM-01, DE.AE-03 | T1090.003 (Multi-hop Proxy: TOR) | TOR Exit Node Connection | iptables | 🐧 | High |
+| 100046 | DE.AE-02, DE.CM-01 | T1071.001 (Web Protocols) | Beaconing Behaviour | windows_sysmon | 🪟 | Medium |
+| 100047 | DE.AE-02, DE.CM-03 | T1105 (Ingress Tool Transfer) | Certutil Used to Download File | windows_sysmon | 🪟 | High |
+| 100048 | DE.AE-02, DE.CM-03 | T1218 (Signed Binary Proxy Execution) | Regsvr32 Executing Remote Script | windows_sysmon | 🪟 | High |
+| 100049 | GV.PO-01, DE.CM-03 | T1078 (Valid Accounts) | Admin Account Used Outside Business Hours | windows_security | 🪟 | Medium |
+| 100050 | RC.RP-01, DE.CM-09 | T1490 (Inhibit System Recovery) | Backup Process Failure | syslog | 🐧 | High |
+| 100051 | DE.CM-09, RS.MA-02 | T1070.001 (Clear Windows Event Logs) | Sysmon Event Log Cleared | windows_eventchannel | 🪟 | High |
+| 100052 | DE.AE-02, PR.DS-01 | T1562.001 (Impair Defenses) | Windows Defender Tampering via PowerShell | windows_sysmon | 🪟 | Critical |
+| 100053 | DE.CM-03, DE.AE-02 | T1036 (Masquerading) | Execution from Recycle Bin | windows_sysmon | 🪟 | High |
 
 ---
 
