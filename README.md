@@ -159,7 +159,6 @@ tests/          Synthetic log sets (trigger.log + benign.log per rule)
   test-runner.sh          Live wazuh-logtest harness
   EVIDENCE_REPORT.md      Signed-off final evidence report
 docs/           Deployment guide, prerequisites, rule catalog, troubleshooting
-```
 
 ---
 
