@@ -8,6 +8,11 @@
 
 ---
 
+> [!IMPORTANT]
+> **Disclaimer:** This is a community-maintained project and is **not** an official Wazuh repository. It is not affiliated with, endorsed by, or sponsored by Wazuh Inc. Use at your own discretion.
+
+---
+
 ## 💡 The Problem
 
 Wazuh is incredibly powerful, but mapping custom detections to the new **NIST CSF v2.0** framework usually means hours of manual spreadsheet tracking and disconnected documentation. Most teams end up with alerts that fire but can't be traced to a compliance outcome — leaving auditors unsatisfied and analysts buried.
