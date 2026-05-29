@@ -150,6 +150,7 @@ rules/          Custom Wazuh rule XMLs — 1 rule per file, organised by NIST CS
 ```
 
 > **How rules are categorised:** Each rule is filed under its **primary** NIST subcategory (the first one listed in the table below). Many rules span multiple functions — for example, a rule may detect an access control violation (**PR.AA**) while also serving as continuous monitoring (**DE.CM**). All secondary mappings are still tagged in the rule's alert output and listed in the table. The folder simply reflects the rule's *dominant* compliance purpose.
+
 decoders/       Custom Wazuh decoder XML for non-standard log sources
 lists/          CDB list source files (C2 domains, rare egress ports)
 mappings/       Machine-readable JSON: rule ID → NIST CSF + MITRE ATT&CK
@@ -178,7 +179,7 @@ Coverage across **Identify (ID)**, **Protect (PR)**, **Detect (DE)**, **Govern (
 
 ### Detailed Rule Mapping
 
-> 🪟 = Windows &nbsp;&nbsp; 🐧 = Linux &nbsp;&nbsp; 🌐 = Cross-platform
+🪟 = Windows &nbsp;&nbsp; 🐧 = Linux &nbsp;&nbsp; 🌐 = Cross-platform
 
 | Rule ID | NIST CSF v2.0 | MITRE ATT&CK | Alert Description | Telemetry Source | OS | Severity |
 |---------|---------------|---------------|-------------------|------------------|----|----------|
